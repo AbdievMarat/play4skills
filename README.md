@@ -20,6 +20,3 @@ https://laravel-lang.com/installation/
 composer require laravel-lang/common --dev
 php artisan lang:add fr
 php artisan lang:update
-
-php.ini:
-extension=soap
