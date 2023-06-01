@@ -1,10 +1,17 @@
 touch database/database.sqlite
+
 .env.example -> .env
+
 .env -> DB_CONNECTION=sqlite
+
 composer install
+
 npm install && npm run dev
+
 php artisan storage:link
+
 php artisan migrate --seed
+
 php artisan ui bootstrap --auth
 
 для настройки локализации:
