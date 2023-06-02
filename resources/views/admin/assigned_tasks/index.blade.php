@@ -70,11 +70,7 @@
                             @if( $assignedTask->command )
                                 <p>Список участников:</p>
                                 @foreach($assignedTask->command as $participant)
-                                    <li class="list-group-item">
-                                        <label>
-                                            {{ $participant }}
-                                        </label>
-                                    </li>
+                                    <li>{{ $participant }}</li>
                                 @endforeach
                             @endif
                         </td>

@@ -45,4 +45,17 @@ $(() => {
         theme: 'bootstrap-5',
     });
 
+    $(document).on('click', '#navbarDropdown', function () {
+        const show = $(this).attr('aria-expanded');
+
+        if (show === 'false') {
+            $('#navbarDropdown').addClass('show');
+            $('[aria-labelledby="navbarDropdown"]').addClass('show');
+            $('#navbarDropdown').attr('aria-expanded', 'true');
+        } else {
+            $('#navbarDropdown').removeClass('show');
+            $('[aria-labelledby="navbarDropdown"]').removeClass('show');
+            $('#navbarDropdown').attr('aria-expanded', 'false');
+        }
+    });
 });

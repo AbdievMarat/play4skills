@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Enums\AssignedTaskStatus;
 use App\Models\AssignedTask;
 use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 class RatingController extends Controller
 {
-    public function index()
+    public function index(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         $rating_users = User::query()
             ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
@@ -27,11 +30,15 @@ class RatingController extends Controller
             ->get()
             ->toArray();
 
-        if($rating_users) {
-            $total_points_max = $rating_users[0]['total_points'];
+        if ($rating_users) {
+            $total_points_max = $rating_users[0]['total_points'] ?? 0;
 
             foreach ($rating_users as $key => $rating_user) {
-                $rating_users[$key]['percentage'] = round((($rating_user['total_points'] ?? 0) / $total_points_max) * 100);
+                if ($total_points_max > 0) {
+                    $rating_users[$key]['percentage'] = round((($rating_user['total_points'] ?? 0) / $total_points_max) * 100);
+                } else {
+                    $rating_users[$key]['percentage'] = 0;
+                }
             }
         }
 
@@ -71,7 +78,7 @@ class RatingController extends Controller
 
         $participants = [];
 
-        if($userCommand) {
+        if ($userCommand) {
             foreach ($userCommand as $participant) {
                 $tasksWithParticipant = array_filter($completedTasksMember, function ($task) use ($participant) {
                     return !empty($task['command']) && in_array($participant, $task['command']);

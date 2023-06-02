@@ -45,6 +45,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['password'] = Hash::make($request->get('password'));
+        $data['decrypted_password'] = $request->get('password');
         $data['command'] = array_filter($data['command'], fn($value) => !is_null($value));
 
         $user = new User($data);
@@ -87,6 +88,7 @@ class UserController extends Controller
         $data = $request->validated();
         if ($request->has('password')) {
             $data['password'] = Hash::make($request->get('password'));
+            $data['decrypted_password'] = $request->get('password');
         }
         $data['command'] = array_filter($data['command'], fn($value) => !is_null($value));
 
