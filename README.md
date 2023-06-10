@@ -1,6 +1,6 @@
 touch database/database.sqlite
 
-.env.example -> .env
+cp .env.example .env
 
 .env -> DB_CONNECTION=sqlite
 
