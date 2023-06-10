@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('attached_file')->nullable();
             $table->integer('bonus')->default(0);
             $table->string('comment_moderator')->nullable();
-            $table->unsignedInteger('user_id_moderator')->nullable();
+            $table->unsignedBigInteger('user_id_moderator')->nullable();
             $table->foreign('user_id_moderator')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('status', [array_column(AssignedTaskStatus::cases(), 'value')])->default(AssignedTaskStatus::Performed->value);
             $table->timestamps();
