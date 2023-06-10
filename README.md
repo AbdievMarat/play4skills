@@ -4,6 +4,8 @@ cp .env.example .env
 
 .env -> DB_CONNECTION=sqlite
 
+php artisan key:generate
+
 composer install
 
 npm install && npm run dev
