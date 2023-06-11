@@ -51,7 +51,7 @@
                         <div>
                             <div
                                 class="small p-2 ms-3 mb-1 rounded-3 bg-secondary bg-opacity-25">{!! $message->content !!}</div>
-                            <p class="small ms-3 mb-3 rounded-3 text-muted float-end">{{ date_format(date_create($message->created_at), 'd.m.Y H:i') }}</p>
+                            <p class="small ms-3 mb-3 rounded-3 text-muted float-end">{{ date('d.m.Y H:i', strtotime($message->created_at)) }}</p>
                         </div>
                     </div>
                 @endforeach
