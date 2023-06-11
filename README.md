@@ -10,7 +10,7 @@ composer install
 
 npm install && npm run dev
 
-php artisan storage:link
+php artisan storage:link or ln -s /var/www/iefrem03/data/www/play4skills.com/storage/app/public /var/www/iefrem03/data/www/play4skills.com/public/storage
 
 php artisan migrate --seed
 

@@ -21,7 +21,7 @@
                         <div class="card-header p-3">
                             <h5 class="mb-0"><i class="bi bi-list-task"></i> Список заданий</h5>
                         </div>
-                        <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative;">
+                        <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; overflow: auto;">
 
                             <table class="table mb-0">
                                 <thead>
@@ -41,8 +41,12 @@
                                         </th>
                                         <td>{{ date_format(date_create($assignedTask->task->date_deadline), 'd.m.Y') }}</td>
                                         <td>
-                                            <h6 class="mb-0"><span
-                                                    class="badge {{ App\Enums\AssignedTaskStatus::from($assignedTask->status)->colorClass() }}">{{ $assignedTask->status }}</span>
+                                            <h6 class="mb-0"><span class="badge {{ App\Enums\AssignedTaskStatus::from($assignedTask->status)->colorClass() }}">
+                                                    {{ $assignedTask->status }}
+                                                    @if($assignedTask->status == App\Enums\AssignedTaskStatus::Revision->value)
+                                                        <p>Комментарий модератора: {{ $assignedTask->comment_moderator }}</p>
+                                                    @endif
+                                                </span>
                                             </h6>
                                         </td>
                                         <td>

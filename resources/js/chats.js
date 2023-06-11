@@ -7,6 +7,14 @@ $(() => {
         chat_content_show(user_id_from);
     });
 
+    $('input[name="content"]').keyup(function(event) {
+        // Проверяем, нажата ли клавиша "Enter"
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            $('#submit-chat').click();
+        }
+    });
+
     $(document).on('click', '#file-upload', function (e) {
         e.preventDefault();
 

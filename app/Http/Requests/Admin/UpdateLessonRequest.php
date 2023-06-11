@@ -25,7 +25,7 @@ class UpdateLessonRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'link' => ['nullable', 'url', 'regex:/https:\/\/www\.youtube\.com\/embed/'],
+            'link' => ['required', 'url', 'regex:/https:\/\/www\.youtube\.com\/embed/'],
             'content' => ['required'],
             'status' => [new Enum(LessonStatus::class)],
         ];

@@ -39,6 +39,24 @@
                 </div>
             </div>
         @endif
+
+        @if( $assignedTask->status == App\Enums\AssignedTaskStatus::Revision->value )
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingCommentModerator">
+                    <button class="accordion-button bg-warning" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-CommentModerator" aria-expanded="false"
+                            aria-controls="panelsStayOpen-CommentModerator">
+                        Комментарий модератора
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-CommentModerator" class="accordion-collapse collapse show"
+                     aria-labelledby="panelsStayOpen-CommentModerator">
+                    <div class="accordion-body">
+                        {{ $assignedTask->comment_moderator }}
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"

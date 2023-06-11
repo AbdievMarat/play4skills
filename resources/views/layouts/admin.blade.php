@@ -47,7 +47,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('admin.users.index') }}"><i class="bi bi-people"></i> Пользователи</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.lessons.index') }}"><i class="bi bi-book"></i> Уроки</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.lessons.index') }}"><i class="bi bi-book"></i> Амбассадоры</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.tasks.index') }}"><i class="bi bi-list-task"></i> Задачи</a></li>
                     </ul>
                 </li>

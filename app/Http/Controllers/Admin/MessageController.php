@@ -35,7 +35,7 @@ class MessageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function create(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         $statuses = MessageStatus::values();
 

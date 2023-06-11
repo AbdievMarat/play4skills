@@ -31,7 +31,7 @@ class RegisterUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.exists' => 'По данной почте нет доступа.',
+            'email.exists' => 'У введенной почты нет доступа к участию.',
         ];
     }
 }
