@@ -62,7 +62,7 @@
                     </x-forms.input>
 
                     @if( $user->avatar )
-                        <img src="{{asset('storage/'.$user->avatar)}}" class="img-thumbnail mt-3" style="max-width: 400px;"
+                        <img src="{{asset('storage/'.$user->avatar)}}" class="img-thumbnail mt-3" style="max-width: 350px;"
                              alt="avatar">
 
                         <div class="form-check">
