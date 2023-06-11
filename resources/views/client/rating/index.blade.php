@@ -20,8 +20,4 @@
             </div>
         @endforeach
     </div>
-
-    @push('scripts')
-        @vite(['resources/js/rating.js'])
-    @endpush
 @endsection

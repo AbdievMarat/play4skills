@@ -76,7 +76,4 @@
             </div>
         </div>
     </section>
-    @push('scripts')
-        @vite(['resources/js/chats.js'])
-    @endpush
 @endsection
