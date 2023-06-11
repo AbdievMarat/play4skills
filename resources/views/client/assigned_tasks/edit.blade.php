@@ -34,7 +34,7 @@
                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
                      aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body">
-                        <img class="img-fluid" src="{{asset('storage/'.$assignedTask->task->file)}}" style="max-width: 400px;" alt="">
+                        <img class="img-fluid" src="{{asset('storage/'.$assignedTask->task->file)}}" style="max-width: 370px;" alt="">
                     </div>
                 </div>
             </div>

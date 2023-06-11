@@ -36,8 +36,7 @@
                                 @foreach($assignedTasks as $assignedTask)
                                     <tr class="fw-normal">
                                         <th>
-                                            <i class="bi bi-clipboard-check"></i>
-                                            <span class="ms-2">{{ $assignedTask->task->name }}</span>
+                                            <i class="bi bi-clipboard-check"></i> {{ $assignedTask->task->name }}
                                         </th>
                                         <td>{{ date_format(date_create($assignedTask->task->date_deadline), 'd.m.Y') }}</td>
                                         <td>

@@ -4,7 +4,7 @@
     <div class="container-fluid row px-2 py-4">
         <div class="col-md-4">
             <div class="card mb-3">
-                <img src="{{ asset('box.png') }}" class="mx-auto" style="max-width: 400px" alt="">
+                <img src="{{ asset('box.png') }}" class="mx-auto" style="max-width: 370px" alt="">
                 <div class="card-body">
                     <h5 class="card-title">Задай вопрос</h5>
                     <p class="card-text">Для получения ключа необходимо выполнить задание</p>
