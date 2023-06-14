@@ -24,7 +24,7 @@
                     <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary bg-opacity-75"
                        style="background-color: #f5f6f7;">{{ $chat['content'] }}</p>
                 @endif
-                <p class="small me-3 mb-3 rounded-3 text-muted">{{ date_format(date_create($chat['created_at']), 'd.m.Y H:i') }}</p>
+                <p class="small me-3 mb-3 rounded-3 text-muted">{{ date('d.m.Y H:i', strtotime($chat['created_at'])) }}</p>
             </div>
             <img
                 src="{{ asset('avatar-default.webp') }}"

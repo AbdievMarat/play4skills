@@ -11,9 +11,9 @@
         <div class="card-body">
             <dl class="row">
                 <dt class="col-sm-4">Создано</dt>
-                <dd class="col-sm-8">{{ date_format(date_create($user->created_at), 'd.m.Y H:i') }}</dd>
+                <dd class="col-sm-8">{{ date('d.m.Y H:i', strtotime($user->created_at)) }}</dd>
                 <dt class="col-sm-4">Изменёно</dt>
-                <dd class="col-sm-8">{{ date_format(date_create($user->updated_at), 'd.m.Y H:i') }}</dd>
+                <dd class="col-sm-8">{{ date('d.m.Y H:i', strtotime($user->updated_at)) }}</dd>
                 <dt class="col-sm-4">Имя</dt>
                 <dd class="col-sm-8">{{ $user->name }}</dd>
                 <dt class="col-sm-4">Логин</dt>

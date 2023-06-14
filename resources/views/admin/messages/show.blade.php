@@ -11,9 +11,9 @@
         <div class="card-body">
             <dl class="row">
                 <dt class="col-sm-4">Создано</dt>
-                <dd class="col-sm-8">{{ date_format(date_create($message->created_at), 'd.m.Y H:i') }}</dd>
+                <dd class="col-sm-8">{{ date('d.m.Y H:i', strtotime($message->created_at)) }}</dd>
                 <dt class="col-sm-4">Изменёно</dt>
-                <dd class="col-sm-8">{{ date_format(date_create($message->updated_at), 'd.m.Y H:i') }}</dd>
+                <dd class="col-sm-8">{{ date('d.m.Y H:i', strtotime($message->updated_at)) }}</dd>
                 <dt class="col-sm-4">Наименование</dt>
                 <dd class="col-sm-8">{!! $message->content !!}</dd>
                 <dt class="col-sm-4">Статус</dt>

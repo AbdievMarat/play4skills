@@ -18,7 +18,7 @@
                     <hr>
                     <b>Баллов за задание:</b> {{ $assignedTask->task->number_of_points }} <br>
                     <b>Ключей за задание:</b> {{ $assignedTask->task->number_of_keys }} <br>
-                    <b>Крайник срок:</b> {{ date_format(date_create($assignedTask->date_deadline), 'd.m.Y') }}
+                    <b>Крайник срок:</b> {{ date('d.m.Y', strtotime($assignedTask->date_deadline)) }}
                 </div>
             </div>
         </div>

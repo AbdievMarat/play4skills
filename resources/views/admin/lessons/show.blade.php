@@ -11,9 +11,9 @@
         <div class="card-body">
             <dl class="row">
                 <dt class="col-sm-4">Создано</dt>
-                <dd class="col-sm-8">{{ date_format(date_create($lesson->created_at), 'd.m.Y H:i') }}</dd>
-                <dt class="col-sm-4">Изменёно</dt>
-                <dd class="col-sm-8">{{ date_format(date_create($lesson->updated_at), 'd.m.Y H:i') }}</dd>
+                <dd class="col-sm-8">{{ date('d.m.Y H:i', strtotime($lesson->created_at)) }}</dd>
+                <dt class="col-sm-4">Изменено</dt>
+                <dd class="col-sm-8">{{ date('d.m.Y H:i', strtotime($lesson->updated_at)) }}</dd>
                 <dt class="col-sm-4">Название</dt>
                 <dd class="col-sm-8">{{ $lesson->name }}</dd>
                 <dt class="col-sm-4">Ссылка на обучающий ролик</dt>

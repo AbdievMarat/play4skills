@@ -70,7 +70,7 @@
                         <td>{!! $task->description !!}</td>
                         <td>{{ $task->number_of_points }}</td>
                         <td>{{ $task->number_of_keys }}</td>
-                        <td>{{ date_format(date_create($task->date_deadline), 'd.m.Y') }}</td>
+                        <td>{{ date('d.m.Y', strtotime($task->date_deadline)) }}</td>
                         <td>
                             <div class="d-flex justify-content-end">
                                 <div>

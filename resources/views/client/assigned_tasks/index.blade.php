@@ -38,7 +38,7 @@
                                         <th>
                                             {{ $assignedTask->task->name }}
                                         </th>
-                                        <td>{{ date_format(date_create($assignedTask->task->date_deadline), 'd.m.Y') }}</td>
+                                        <td>{{ date('d.m.Y', strtotime($assignedTask->task->date_deadline)) }}</td>
                                         <td>
                                             <h6 class="mb-0"><span class="badge {{ App\Enums\AssignedTaskStatus::from($assignedTask->status)->colorClass() }}">
                                                     {{ $assignedTask->status }}

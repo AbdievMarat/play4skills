@@ -73,6 +73,10 @@
                                     <li>{{ $participant }}</li>
                                 @endforeach
                             @endif
+
+                            <br>
+                            Создано: {{ date('d.m.Y H:i', strtotime($assignedTask->created_at)) }} <br>
+                            Изменено: {{ date('d.m.Y H:i', strtotime($assignedTask->updated_at)) }}
                         </td>
                         <td>{{ $assignedTask->bonus }}</td>
                         <td>
