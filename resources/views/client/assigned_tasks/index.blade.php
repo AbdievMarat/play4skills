@@ -49,7 +49,12 @@
                                             </h6>
                                         </td>
                                         <td>
-                                            @if(Auth::user()->command !== null && count(Auth::user()->command) >= 3 && in_array($assignedTask->status, [App\Enums\AssignedTaskStatus::Performed->value, App\Enums\AssignedTaskStatus::UnderReview->value, App\Enums\AssignedTaskStatus::Revision->value]))
+                                            @if(
+                                                Auth::user()->command !== null &&
+                                                count(Auth::user()->command) >= 3 &&
+                                                in_array($assignedTask->status, [App\Enums\AssignedTaskStatus::Performed->value, App\Enums\AssignedTaskStatus::UnderReview->value, App\Enums\AssignedTaskStatus::Revision->value]) &&
+                                                $assignedTask->task->date_deadline > date('Y-m-d')
+                                            )
                                                 <div class="text-center">
                                                     <a href="{{ route('assigned_tasks.edit', ['assigned_task' => $assignedTask]) }}"
                                                        type="button"

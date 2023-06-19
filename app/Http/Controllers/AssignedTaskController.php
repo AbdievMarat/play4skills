@@ -19,10 +19,8 @@ class AssignedTaskController extends Controller
     {
         $assignedTasks = Auth::user()->assignedTasks()->with('task')->get();
 
-        $currentDate = Carbon::now()->format('Y-m-d');
-
         foreach ($assignedTasks as $assignedTask) {
-            if ($assignedTask->task->date_deadline < $currentDate) {
+            if ($assignedTask->task->date_deadline < date('Y-m-d') && in_array($assignedTask->status, [AssignedTaskStatus::Performed->value])) {
                 $assignedTask->status = AssignedTaskStatus::Overdue->value;
             }
         }

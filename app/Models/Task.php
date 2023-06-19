@@ -36,6 +36,10 @@ class Task extends Model
             $q->where("{$this->getTable()}.id", '=', request('id'));
         });
 
+        $query->when(request('name'), function (Builder $q) {
+            $q->where("{$this->getTable()}.name", 'LIKE', '%' . request('name') . '%');
+        });
+
         $query->when(request('description'), function (Builder $q) {
             $q->where("{$this->getTable()}.description", 'LIKE', '%' . request('description') . '%');
         });
