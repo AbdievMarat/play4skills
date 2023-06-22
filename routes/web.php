@@ -31,6 +31,9 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('register', [LoginController::class, 'showRegisterForm'])->name('showRegisterForm');
 Route::post('register', [LoginController::class, 'register'])->name('register');
 
+Route::get('rating_display', [RatingController::class, 'display'])->name('rating_display');
+Route::get('rating/{userId}', [RatingController::class, 'getDetailWithUser'])->name('getDetailWithUser');
+
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resources([
         'users' => UserController::class,
@@ -55,6 +58,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('assigned_tasks', App\Http\Controllers\AssignedTaskController::class)->only(['index', 'edit', 'update']);
     Route::resource('users', App\Http\Controllers\UserController::class)->only(['edit', 'update']);
     Route::get('rating', [RatingController::class, 'index'])->name('rating');
-    Route::get('rating/{userId}', [RatingController::class, 'getDetailWithUser'])->name('getDetailWithUser');
 });
 

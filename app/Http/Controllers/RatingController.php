@@ -96,4 +96,36 @@ class RatingController extends Controller
             ])->render()
         ]);
     }
+
+    public function display(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    {
+        $rating_users = User::query()
+            ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
+            ->leftJoin('roles', 'users_roles.role_id', '=', 'roles.id')
+            ->leftJoin('assigned_tasks', function ($join) {
+                $join->on('users.id', '=', 'assigned_tasks.user_id')
+                    ->where('assigned_tasks.status', '=', AssignedTaskStatus::Completed);
+            })
+            ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
+            ->select('users.id', 'users.name', 'users.avatar', DB::raw('SUM(bonus) + SUM(number_of_points) as total_points'))
+            ->where('roles.name', 'student')
+            ->groupBy('users.id', 'users.name', 'users.avatar')
+            ->orderByDesc('total_points')
+            ->get()
+            ->toArray();
+
+        if ($rating_users) {
+            $total_points_max = $rating_users[0]['total_points'] ?? 0;
+
+            foreach ($rating_users as $key => $rating_user) {
+                if ($total_points_max > 0) {
+                    $rating_users[$key]['percentage'] = round((($rating_user['total_points'] ?? 0) / $total_points_max) * 100);
+                } else {
+                    $rating_users[$key]['percentage'] = 0;
+                }
+            }
+        }
+
+        return view('client.rating.display', compact('rating_users'));
+    }
 }
