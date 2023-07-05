@@ -9,7 +9,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 
 class RatingController extends Controller
 {
@@ -23,7 +22,8 @@ class RatingController extends Controller
                     ->where('assigned_tasks.status', '=', AssignedTaskStatus::Completed);
             })
             ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
-            ->select('users.id', 'users.name', 'users.avatar', DB::raw('SUM(bonus) + SUM(number_of_points) as total_points'))
+            ->select('users.id', 'users.name', 'users.avatar')
+            ->selectRaw('COALESCE(SUM(bonus), 0) + COALESCE(SUM(number_of_points), 0) as total_points')
             ->where('roles.name', 'student')
             ->groupBy('users.id', 'users.name', 'users.avatar')
             ->orderByDesc('total_points')
@@ -31,7 +31,7 @@ class RatingController extends Controller
             ->toArray();
 
         if ($rating_users) {
-            $total_points_max = $rating_users[0]['total_points'] ?? 0;
+            $total_points_max = $rating_users[0]['total_points'];
 
             foreach ($rating_users as $key => $rating_user) {
                 if ($total_points_max > 0) {
@@ -49,7 +49,8 @@ class RatingController extends Controller
     {
         $completedTasks = AssignedTask::query()
             ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
-            ->select('assigned_tasks.id', DB::raw('bonus + tasks.number_of_points as points'))
+            ->select('assigned_tasks.id')
+            ->selectRaw('bonus + tasks.number_of_points as points')
             ->where('user_id', '=', $userId)
             ->where('status', '=', AssignedTaskStatus::Completed);
 
@@ -107,7 +108,8 @@ class RatingController extends Controller
                     ->where('assigned_tasks.status', '=', AssignedTaskStatus::Completed);
             })
             ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
-            ->select('users.id', 'users.name', 'users.avatar', DB::raw('SUM(bonus) + SUM(number_of_points) as total_points'))
+            ->select('users.id', 'users.name', 'users.avatar')
+            ->selectRaw('COALESCE(SUM(bonus), 0) + COALESCE(SUM(number_of_points), 0) as total_points')
             ->where('roles.name', 'student')
             ->groupBy('users.id', 'users.name', 'users.avatar')
             ->orderByDesc('total_points')

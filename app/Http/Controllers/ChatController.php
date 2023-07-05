@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -23,7 +22,8 @@ class ChatController extends Controller
 
         $chats = Chat::query()
             ->leftJoin('users', 'chats.user_id_from', '=', 'users.id')
-            ->select('chats.user_id_from', 'users.name', 'users.avatar', DB::raw('MAX(chats.updated_at) as updated_at_max'))
+            ->select('chats.user_id_from', 'users.name', 'users.avatar')
+            ->selectRaw('MAX(chats.updated_at) as updated_at_max')
             ->where('chats.user_id_to', '=', $userIdTo)
             ->groupBy('chats.user_id_from', 'users.name')
             ->orderBy('updated_at_max', 'desc')
@@ -31,7 +31,8 @@ class ChatController extends Controller
             ->toArray();
 
         $unreadChats = Chat::query()
-            ->select('user_id_to', DB::raw('COUNT(*) as number_of_unread'))
+            ->select('user_id_to')
+            ->selectRaw('COUNT(*) as number_of_unread')
             ->where('user_id_from', '=', $userIdTo)
             ->where('status', '=', ChatStatus::Inactive)
             ->groupBy('user_id_to')
@@ -84,7 +85,8 @@ class ChatController extends Controller
         $userIdTo = Auth::id();
 
         $chats = Chat::query()
-            ->select('content', 'is_file', 'created_at', DB::raw("CASE WHEN user_id_to = {$userIdTo} THEN 1 ELSE 0 END as to_user"))
+            ->select('content', 'is_file', 'created_at')
+            ->selectRaw("CASE WHEN user_id_to = {$userIdTo} THEN 1 ELSE 0 END as to_user")
             ->where(function ($query) use ($userIdFrom, $userIdTo) {
                 $query->where('user_id_from', $userIdFrom)
                     ->where('user_id_to', $userIdTo);
