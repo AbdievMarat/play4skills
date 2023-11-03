@@ -28,7 +28,16 @@ class UpdateTaskRequest extends FormRequest
             'file' => ['nullable', 'file', File::image()->max(4 * 1024)],
             'number_of_points' => ['required', 'integer'],
             'number_of_keys' => ['required', 'integer'],
+            'important' => ['boolean'],
             'date_deadline' => ['required', 'date'],
+            'time_deadline' => ['required', 'date_format:H:i'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'important' => filter_var($this->input('important'), FILTER_VALIDATE_BOOLEAN),
+        ]);
     }
 }

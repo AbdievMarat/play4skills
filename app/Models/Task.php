@@ -17,7 +17,9 @@ class Task extends Model
         'file',
         'number_of_points',
         'number_of_keys',
+        'important',
         'date_deadline',
+        'time_deadline',
     ];
 
     public function assignedTasks(): HasMany
@@ -50,6 +52,10 @@ class Task extends Model
 
         $query->when(request('number_of_keys'), function (Builder $q) {
             $q->where("{$this->getTable()}.number_of_points", '=', request('number_of_keys'));
+        });
+
+        $query->when(request()->filled('important'), function (Builder $q) {
+            $q->where("{$this->getTable()}.important", '=', request('important'));
         });
 
         $query->when(request('date_deadline'), function (Builder $q) {

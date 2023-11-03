@@ -6,17 +6,17 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-12 col-xl-10">
 
-                    @if(Auth::user()->command === null || count(Auth::user()->command) < 3)
-                        <div class="alert alert-primary mt-3" role="alert">
-                            <h4 class="alert-heading">
-                                Перед началом выполнения заданий, необходимо заполнить список участников команды в
-                                <a href="{{ route('users.edit', ['user' => Auth::user()]) }}" class="alert-link">
-                                    личном кабинете
-                                </a>!
-                            </h4>
-                            Минимальное количество участников команды должно быть 3 человека.
-                        </div>
-                    @endif
+{{--                    @if(Auth::user()->command === null || count(Auth::user()->command) < 3)--}}
+{{--                        <div class="alert alert-primary mt-3" role="alert">--}}
+{{--                            <h4 class="alert-heading">--}}
+{{--                                Перед началом выполнения заданий, необходимо заполнить список участников команды в--}}
+{{--                                <a href="{{ route('users.edit', ['user' => Auth::user()]) }}" class="alert-link">--}}
+{{--                                    личном кабинете--}}
+{{--                                </a>!--}}
+{{--                            </h4>--}}
+{{--                            Минимальное количество участников команды должно быть 3 человека.--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
                     <div class="card">
                         <div class="card-header p-3">
                             <h5 class="mb-0"><i class="bi bi-list-task"></i> Список заданий</h5>
@@ -34,11 +34,11 @@
                                 </thead>
                                 <tbody>
                                 @foreach($assignedTasks as $assignedTask)
-                                    <tr class="fw-normal">
+                                    <tr class="fw-normal @if($assignedTask->task->important) alert alert-danger @endif">
                                         <th>
                                             {{ $assignedTask->task->name }}
                                         </th>
-                                        <td>{{ date('d.m.Y', strtotime($assignedTask->task->date_deadline)) }}</td>
+                                        <td>{{ date('d.m.Y', strtotime($assignedTask->task->date_deadline)) }} {{ date('H:i', strtotime($assignedTask->task->time_deadline)) }}</td>
                                         <td>
                                             <h6 class="mb-0"><span class="badge {{ App\Enums\AssignedTaskStatus::from($assignedTask->status)->colorClass() }}">
                                                     {{ $assignedTask->status }}
@@ -49,11 +49,11 @@
                                             </h6>
                                         </td>
                                         <td>
+{{--                                            Auth::user()->command !== null &&--}}
+{{--                                            count(Auth::user()->command) >= 3 &&--}}
                                             @if(
-                                                Auth::user()->command !== null &&
-                                                count(Auth::user()->command) >= 3 &&
                                                 in_array($assignedTask->status, [App\Enums\AssignedTaskStatus::Performed->value, App\Enums\AssignedTaskStatus::UnderReview->value, App\Enums\AssignedTaskStatus::Revision->value]) &&
-                                                $assignedTask->task->date_deadline >= date('Y-m-d')
+                                                $assignedTask->task->date_deadline . ' ' . $assignedTask->task->time_deadline >= date('Y-m-d H:i')
                                             )
                                                 <div class="text-center">
                                                     <a href="{{ route('assigned_tasks.edit', ['assigned_task' => $assignedTask]) }}"

@@ -104,6 +104,18 @@
                                     </form>
                                 @endif
 
+
+                                @if($assignedTask->status == App\Enums\AssignedTaskStatus::Performed->value)
+                                    <form
+                                        action="{{ route('admin.assignedTasksUnderReview', ['assigned_task' => $assignedTask]) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-info mx-2 under-review"><i
+                                                    class="bi bi-arrow-up-circle" title="Завершить задачу"></i></button>
+                                    </form>
+                                @endif
+
                                 <form
                                     action="{{ route('admin.assigned_tasks.destroy', ['assigned_task' => $assignedTask]) }}"
                                     method="post">

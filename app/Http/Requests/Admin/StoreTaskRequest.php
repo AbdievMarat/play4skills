@@ -28,7 +28,16 @@ class StoreTaskRequest extends FormRequest
             'file' => ['nullable', File::image()->max(2 * 1024)],
             'number_of_points' => ['required', 'integer'],
             'number_of_keys' => ['required', 'integer'],
-            'date_deadline' => ['required', 'date', 'after:today'],
+            'important' => ['boolean'],
+            'date_deadline' => ['required', 'date'],
+            'time_deadline' => ['required', 'date_format:H:i'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'important' => filter_var($this->input('important'), FILTER_VALIDATE_BOOLEAN),
+        ]);
     }
 }

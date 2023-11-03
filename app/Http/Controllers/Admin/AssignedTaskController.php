@@ -101,7 +101,7 @@ class AssignedTaskController extends Controller
         $key = new Key();
         $key->task()->associate($assignedTask->task_id);
         $key->user()->associate($assignedTask->user_id);
-        $key->amount = 1;
+        $key->amount = $assignedTask->task->number_of_keys;
         $key->spent = false;
         $key->save();
 
@@ -121,5 +121,13 @@ class AssignedTaskController extends Controller
         $message->save();
 
         return redirect()->back()->with('success', ['text' => 'Возвращено на доработку!']);
+    }
+
+    public function underReview(AssignedTask $assignedTask): RedirectResponse
+    {
+        $assignedTask->status = AssignedTaskStatus::UnderReview->value;
+        $assignedTask->update();
+
+        return redirect()->back()->with('success', ['text' => 'Успешно сохранено!']);
     }
 }

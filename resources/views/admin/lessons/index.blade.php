@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">Амбассадоры</div>
+        <div class="card-header">Гейм-мастера</div>
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div></div>

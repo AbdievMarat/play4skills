@@ -73,21 +73,22 @@
                         @method('PUT')
                         @csrf
 
-                        <span class="h2">Список участников</span>
+                        @if(Auth::user()->command)
+                            <span class="h2">Список участников</span>
 
-                        <ul class="list-group">
-                            @foreach(Auth::user()->command as $key => $command_member)
-                                <li class="list-group-item">
-                                    <label>
-                                        <input class="form-check-input me-3" type="checkbox" name="command_member[{{ $key }}]" @checked(in_array($command_member, $assignedTask->command ?? []))  />
-                                        <input type="hidden" name="command_member_name[{{ $key }}]" value="{{ $command_member }}" />
-                                        {{ $command_member }}
-                                    </label>
-                                </li>
-                            @endforeach
-                        </ul>
-
+                            <ul class="list-group">
+                                @foreach(Auth::user()->command as $key => $command_member)
+                                    <li class="list-group-item">
+                                        <label>
+                                            <input class="form-check-input me-3" type="checkbox" name="command_member[{{ $key }}]" @checked(in_array($command_member, $assignedTask->command ?? []))  />
+                                            <input type="hidden" name="command_member_name[{{ $key }}]" value="{{ $command_member }}" />
+                                            {{ $command_member }}
+                                        </label>
+                                    </li>
+                                @endforeach
+                            </ul>
                         <hr>
+                        @endif
 
                         <x-forms.tinymce-editor name="comment" label="Комментарий"
                                                 value="{{ old('comment') ?? $assignedTask->comment }}"></x-forms.tinymce-editor>
@@ -97,12 +98,12 @@
 
                             <div class="form-check">
                                 <input type="checkbox" name="delete_file" class="form-check-input" id="delete_file">
-                                <label class="form-check-label" for="delete_file">Удалить файл</label>
+                                <label class="form-check-label" for="delete_file">Удалить изображение</label>
                             </div>
                         @endif
 
-                        <x-forms.input type="file" name="attached_file" id="attached_file" label="Файл"
-                                       placeholder="Выберите файл">
+                        <x-forms.input type="file" name="attached_file" id="attached_file" label="Изображение"
+                                       placeholder="Выберите изображение">
                         </x-forms.input>
 
                         <button type="submit" class="btn btn-success mt-2">Сохранить</button>

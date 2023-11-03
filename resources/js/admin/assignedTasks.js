@@ -43,4 +43,23 @@ $(() => {
             allowOutsideClick: () => !Swal.isLoading()
         });
     });
+
+    $(document).on('click', '.under-review', function (e) {
+        e.preventDefault();
+        const form = $(this).closest('form');
+
+        Swal.fire({
+            title: 'Завершить задачу?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#107ee1',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Да!',
+            cancelButtonText: 'Отмена!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
 });

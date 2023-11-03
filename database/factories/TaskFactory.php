@@ -21,7 +21,9 @@ class TaskFactory extends Factory
             'description' => $this->faker->text,
             'number_of_points' => $this->faker->numberBetween(5,10),
             'number_of_keys' => $this->faker->numberBetween(1,2),
-            'date_deadline' => $this->faker->dateTimeBetween('now', '+10 days')->format('Y-m-d')
+            'important' => $this->faker->boolean(),
+            'date_deadline' => $this->faker->dateTimeBetween('now', '+10 days')->format('Y-m-d'),
+            'time_deadline' => $this->faker->time('H:i')
         ];
     }
 }

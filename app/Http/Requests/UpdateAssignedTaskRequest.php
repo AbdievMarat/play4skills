@@ -24,7 +24,7 @@ class UpdateAssignedTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'comment' => ['required'],
+            'comment' => ['nullable', 'string'],
             'attached_file' => ['nullable', 'file', File::image()->max(4 * 1024)],
             'command_member' => ['nullable', 'array'],
             'command_member_name' => ['nullable', 'array'],

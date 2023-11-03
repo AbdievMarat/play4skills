@@ -31,18 +31,18 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('stream') }}"><i class="bi bi-megaphone"></i> Новости</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('clientLessons') }}"><i class="bi bi-book"></i> Амбассадоры</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('clientLessons') }}"><i class="bi bi-book"></i> Гейм-мастера</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('assigned_tasks.index') }}"><i class="bi bi-list-task"></i> Задания</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('rating') }}"><i class="bi bi-graph-up"></i> Рейтинг</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('users.edit', ['user' => Auth::user()]) }}"><i class="bi bi-person-circle"></i> Личный кабинет</a></li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('chats.index') }}">
-                        <i class="bi bi-chat-dots"></i> Чат поддержки
-                        @if(Auth::user()->getUnreadMessageCount() > 0)
-                            <span class="badge bg-primary">{{ Auth::user()->getUnreadMessageCount() }}</span>
-                        @endif
-                    </a>
-                </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" href="{{ route('chats.index') }}">--}}
+{{--                        <i class="bi bi-chat-dots"></i> Чат поддержки--}}
+{{--                        @if(Auth::user()->getUnreadMessageCount() > 0)--}}
+{{--                            <span class="badge bg-primary">{{ Auth::user()->getUnreadMessageCount() }}</span>--}}
+{{--                        @endif--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
 
             <!-- Right Side Of Navbar -->

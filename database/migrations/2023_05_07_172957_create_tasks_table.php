@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('file')->nullable();
             $table->integer('number_of_points');
             $table->integer('number_of_keys');
+            $table->boolean('important')->default(false);
             $table->date('date_deadline');
+            $table->time('time_deadline');
             $table->timestamps();
         });
     }

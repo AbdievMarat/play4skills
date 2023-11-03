@@ -6,11 +6,11 @@
             Редактирование
         </div>
         <div class="card-body">
-            @if(Auth::user()->command === null || count(Auth::user()->command) < 3)
-                <div class="alert alert-primary" role="alert">
-                    Минимальное количество участников команды должно быть 3 человека.
-                </div>
-            @endif
+{{--            @if(Auth::user()->command === null || count(Auth::user()->command) < 3)--}}
+{{--                <div class="alert alert-primary" role="alert">--}}
+{{--                    Минимальное количество участников команды должно быть 3 человека.--}}
+{{--                </div>--}}
+{{--            @endif--}}
 
             <form class="row g-3" method="POST" action="{{ route('users.update', ['user' => Auth::user()]) }}" enctype="multipart/form-data">
                 @method('PUT')

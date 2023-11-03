@@ -21,6 +21,7 @@
                     <th>Описание</th>
                     <th>Баллы</th>
                     <th>Ключи</th>
+                    <th>Важное</th>
                     <th>Крайний срок</th>
                     <th style="width: 160px"></th>
                 </tr>
@@ -49,6 +50,11 @@
                         </x-input-search>
                     </th>
                     <th>
+                        <x-select-search name="important" form="search" :options="['1' => 'да', '0' => 'нет']"
+                                         value="{{ Request::get('important') }}">
+                        </x-select-search>
+                    </th>
+                    <th>
                         <x-input-search type="date" name="date_deadline" form="search"
                                         value="{{ Request::get('date_deadline') }}">
                         </x-input-search>
@@ -70,7 +76,8 @@
                         <td>{!! $task->description !!}</td>
                         <td>{{ $task->number_of_points }}</td>
                         <td>{{ $task->number_of_keys }}</td>
-                        <td>{{ date('d.m.Y', strtotime($task->date_deadline)) }}</td>
+                        <td>{{ $task->important ? 'Да' : 'Нет' }}</td>
+                        <td>{{ date('d.m.Y', strtotime($task->date_deadline)) }} {{ date('H:i', strtotime($task->time_deadline)) }}</td>
                         <td>
                             <div class="d-flex justify-content-end">
                                 <div>
