@@ -20,8 +20,7 @@ class StreamController extends Controller
     {
         $amountKeys = Auth::user()->keys()->where('spent', '=', false)->sum('amount');
         $questions = Auth::user()->questions()->get();
-        $messages = Message::query()
-            ->select('content', 'created_at')
+        $messages = Message::with('user')
             ->where('status', '=', MessageStatus::Active)
             ->orderByRaw('pinned DESC, updated_at DESC')
             ->get();

@@ -36,7 +36,7 @@
                                 <div class="row mb-2 g-1">
                                     <div class="col-md-12">Имена сотрудников</div>
                                 </div>
-                                @for ($i = 0; $i <= 4; $i++)
+                                @for ($i = 0; $i <= 7; $i++)
                                     <div class="row mb-2 g-1">
                                         <div class="col-md-12">
                                             <input type="text"

@@ -30,7 +30,11 @@ class UpdateUserRequest extends FormRequest
             'command.1' => 'required|min:3',
             'command.2' => 'required|min:3',
             'command.3' => 'nullable|min:3',
-            'command.4' => 'nullable|min:3'
+            'command.4' => 'nullable|min:3',
+            'command.5' => 'nullable|min:3',
+            'command.6' => 'nullable|min:3',
+            'command.7' => 'nullable|min:3',
+            'command.8' => 'nullable|min:3'
         ];
     }
 

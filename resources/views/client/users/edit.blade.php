@@ -19,7 +19,7 @@
                 <div class="col-md-6">
                     <div class="col-md-12">
                         <label for="name" class="form-label">Имя</label>
-                        <input class="form-control" type="text" id="name" value="{!! $user->name !!}" disabled>
+                        <input class="form-control" type="text" id="name" value="{!! $user->name !!}">
                     </div>
                     <div class="col-md-12 pt-3">
                         <div class="card mb-3">
@@ -30,7 +30,7 @@
                                 <div class="row mb-2 g-1">
                                     <div class="col-md-12">Имена сотрудников</div>
                                 </div>
-                                @for ($i = 0; $i <= 4; $i++)
+                                @for ($i = 0; $i <= 7; $i++)
                                     <div class="row mb-2 g-1">
                                         <div class="col-md-12">
                                             <input type="text"

@@ -89,7 +89,7 @@ class AssignedTaskController extends Controller
 
     public function accept(Request $request, AssignedTask $assignedTask): RedirectResponse
     {
-        $assignedTask->bonus = $request->get('bonus', 0);
+        $assignedTask->bonus = $request->get('bonus') ?? 0;
         $assignedTask->status = AssignedTaskStatus::Completed->value;
         $assignedTask->update();
 
@@ -98,12 +98,15 @@ class AssignedTaskController extends Controller
         $message->user()->associate($request->user());
         $message->save();
 
-        $key = new Key();
-        $key->task()->associate($assignedTask->task_id);
-        $key->user()->associate($assignedTask->user_id);
-        $key->amount = $assignedTask->task->number_of_keys;
-        $key->spent = false;
-        $key->save();
+        $number_of_keys = $assignedTask->task->number_of_keys;
+        for ($i = 0; $i < $number_of_keys; $i++) {
+            $key = new Key();
+            $key->task()->associate($assignedTask->task_id);
+            $key->user()->associate($assignedTask->user_id);
+            $key->amount = 1;
+            $key->spent = false;
+            $key->save();
+        }
 
         return redirect()->back()->with('success', ['text' => 'Принято!']);
     }
