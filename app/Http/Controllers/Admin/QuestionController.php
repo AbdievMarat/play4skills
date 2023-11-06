@@ -22,6 +22,7 @@ class QuestionController extends Controller
     {
         $questions = Question::with('user')
             ->filter()
+            ->orderBy('created_at', 'desc')
             ->paginate(20)
             ->withQueryString();
         $students = User::query()->whereHas('roles', function (Builder $query) {
