@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('content', 500);
+            $table->text('content');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->boolean('pinned')->default(false);
             $table->enum('status', [array_column(MessageStatus::cases(), 'value')])->default(MessageStatus::Active->value);
