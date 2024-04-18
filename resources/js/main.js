@@ -45,17 +45,19 @@ $(() => {
         theme: 'bootstrap-5',
     });
 
-    $(document).on('click', '#navbarDropdown', function () {
-        const show = $(this).attr('aria-expanded');
+    $(document).on('click', '.dropdown-toggle-custom', function () {
+        const $this = $(this);
+        const dropdownMenu = $this.next('.dropdown-menu');
+        const isOpen = $this.attr('aria-expanded') === 'true';
 
-        if (show === 'false') {
-            $('#navbarDropdown').addClass('show');
-            $('[aria-labelledby="navbarDropdown"]').addClass('show');
-            $('#navbarDropdown').attr('aria-expanded', 'true');
+        if (!isOpen) {
+            $this.addClass('show');
+            dropdownMenu.addClass('show');
+            $this.attr('aria-expanded', 'true');
         } else {
-            $('#navbarDropdown').removeClass('show');
-            $('[aria-labelledby="navbarDropdown"]').removeClass('show');
-            $('#navbarDropdown').attr('aria-expanded', 'false');
+            $this.removeClass('show');
+            dropdownMenu.removeClass('show');
+            $this.attr('aria-expanded', 'false');
         }
     });
 });

@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Enums\ChatStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'password',
         'decrypted_password',
         'command',
+        'mentor_id',
         'avatar'
     ];
 
@@ -83,6 +85,11 @@ class User extends Authenticatable
         return $this->hasMany(Chat::class, 'user_id_from');
     }
 
+    public function mentor(): BelongsTo
+    {
+        return $this->belongsTo(Mentor::class);
+    }
+
     /**
      * @param $role
      * @return mixed
@@ -101,6 +108,10 @@ class User extends Authenticatable
     {
         $query->when(request('id'), function (Builder $q) {
             $q->where("{$this->getTable()}.id", '=', request('id'));
+        });
+
+        $query->when(request('mentor_id'), function (Builder $q) {
+            $q->where("{$this->getTable()}.mentor_id", '=', request('mentor_id'));
         });
 
         $query->when(request('name'), function (Builder $q) {

@@ -26,6 +26,12 @@
                                         placeholder="Выберите роль" value="{{ old('role_id') }}">
                         </x-forms.select>
                     </div>
+                    <div class="col-md-12">
+                        <x-forms.select name="mentor_id" id="mentor_id" label="Наставник"
+                                        :options="$mentors"
+                                        placeholder="Выберите наставника" value="{{ old('mentor_id') }}">
+                        </x-forms.select>
+                    </div>
                     <div class="col-md-12 pt-3">
                         <div class="card mb-3">
                             <div class="card-header">

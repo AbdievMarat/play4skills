@@ -20,6 +20,7 @@
                     <th>Имя</th>
                     <th>Логин</th>
                     <th>Роль</th>
+                    <th>Наставник</th>
                     <th style="width: 160px"></th>
                 </tr>
                 <tr>
@@ -36,6 +37,11 @@
                         </x-input-search>
                     </th>
                     <th></th>
+                    <th>
+                        <x-select-search name="mentor_id" form="search" :options="$mentors"
+                                         value="{{ Request::get('mentor_id') }}">
+                        </x-select-search>
+                    </th>
                     <th></th>
                 </tr>
                 </thead>
@@ -60,6 +66,7 @@
                                 Нет ролей
                             @endforelse
                         </td>
+                        <td>{{ $user->mentor->name ?? '' }}</td>
                         <td>
                             <div class="d-flex justify-content-end">
                                 <div>

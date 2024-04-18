@@ -1,7 +1,7 @@
 @extends('layouts.client')
 
 @section('content')
-    <div id="rating-detail-container"></div>
+    <div id="points-detail-container"></div>
     <div class="container">
 {{--        <div class="alert alert-primary d-flex align-items-center mt-4" role="alert">--}}
 {{--            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">--}}
@@ -12,7 +12,7 @@
 {{--            </div>--}}
 {{--        </div>--}}
         @foreach($rating_users as $rating_user)
-            <nav class="navbar mt-4 btn btn-outline-success detail" data-user_id="{{ $rating_user['id'] }}">
+            <nav class="navbar mt-4 btn btn-outline-success rounded-0 get-mentor-users" data-mentor_id="{{ $rating_user['id'] }}">
                 <a class="navbar-brand" href="#">
                     <img
                         src="{{ $rating_user['avatar'] ? asset('storage/'.$rating_user['avatar']) : asset('avatar-default.webp') }}"
@@ -22,10 +22,12 @@
                 </a>
                 <button class="btn btn-danger me-2" type="button">{{ $rating_user['total_points'] ?? 0 }}</button>
             </nav>
-            <div class="progress">
+            <div class="progress rounded-0">
                 <div class="progress-bar" role="progressbar" style="width: {{ $rating_user['percentage'] }}%"
                      aria-valuemin="0" aria-valuemax="100"></div>
             </div>
+
+            <div id="mentor-users-container-{{ $rating_user['id'] }}"></div>
         @endforeach
     </div>
 @endsection

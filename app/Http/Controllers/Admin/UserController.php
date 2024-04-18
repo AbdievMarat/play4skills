@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUserRequest;
 use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Models\Mentor;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
@@ -20,12 +21,13 @@ class UserController extends Controller
      */
     public function index(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        $users = User::with('roles')
+        $users = User::with('roles', 'mentor')
             ->filter()
             ->paginate(10)
             ->withQueryString();
+        $mentors = Mentor::query()->pluck('name', 'id')->all();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users', 'mentors'));
     }
 
     /**
@@ -34,8 +36,9 @@ class UserController extends Controller
     public function create(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         $roles = Role::query()->pluck('description', 'id')->all();
+        $mentors = Mentor::query()->pluck('name', 'id')->all();
 
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create', compact('roles', 'mentors'));
     }
 
     /**
@@ -74,8 +77,9 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $roles = Role::query()->pluck('description', 'id')->all();
+        $mentors = Mentor::query()->pluck('name', 'id')->all();
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles', 'mentors'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Mentor;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -34,9 +35,12 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
+            $mentor = Mentor::all()->random();
+
             User::factory()
                 ->state($user)
                 ->hasAttached($studentRole)
+                ->for($mentor)
                 ->create();
         }
     }

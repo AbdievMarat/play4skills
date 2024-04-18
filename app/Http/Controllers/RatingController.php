@@ -17,15 +17,17 @@ class RatingController extends Controller
         $rating_users = User::query()
             ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
             ->leftJoin('roles', 'users_roles.role_id', '=', 'roles.id')
+            ->leftJoin('mentors', 'users.mentor_id', '=', 'mentors.id')
             ->leftJoin('assigned_tasks', function ($join) {
                 $join->on('users.id', '=', 'assigned_tasks.user_id')
                     ->where('assigned_tasks.status', '=', AssignedTaskStatus::Completed);
             })
             ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
-            ->select('users.id', 'users.name', 'users.avatar')
+            ->select('mentors.id', 'mentors.name', 'mentors.avatar')
             ->selectRaw('COALESCE(SUM(bonus), 0) + COALESCE(SUM(number_of_points), 0) as total_points')
-            ->where('roles.name', 'student')
-            ->groupBy('users.id', 'users.name', 'users.avatar')
+            ->where('roles.name', '=', 'student')
+            ->whereNotNull('mentors.name')
+            ->groupBy('mentors.id', 'mentors.name', 'mentors.avatar')
             ->orderByDesc('total_points')
             ->get()
             ->toArray();
@@ -45,7 +47,7 @@ class RatingController extends Controller
         return view('client.rating.index', compact('rating_users'));
     }
 
-    public function getDetailWithUser(int $userId): JsonResponse
+    public function getPointsDetail(int $userId): JsonResponse
     {
         $completedTasks = AssignedTask::query()
             ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
@@ -85,8 +87,10 @@ class RatingController extends Controller
                     return !empty($task['command']) && in_array($participant, $task['command']);
 
                 });
-                $efficiencyPercentage = (count($tasksWithParticipant) / $totalTaskAssigned) * 100;
-                $participants[$participant] = $efficiencyPercentage;
+                if (count($tasksWithParticipant) > 0) {
+                    $efficiencyPercentage = (count($tasksWithParticipant) / $totalTaskAssigned) * 100;
+                }
+                $participants[$participant] = $efficiencyPercentage ?? 0;
             }
         }
 
@@ -98,11 +102,10 @@ class RatingController extends Controller
         ]);
     }
 
-    public function display(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function getMentorUsers(int $mentorId): JsonResponse
     {
-        $rating_users = User::query()
-            ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
-            ->leftJoin('roles', 'users_roles.role_id', '=', 'roles.id')
+        $users = User::query()
+            ->leftJoin('mentors', 'users.mentor_id', '=', 'mentors.id')
             ->leftJoin('assigned_tasks', function ($join) {
                 $join->on('users.id', '=', 'assigned_tasks.user_id')
                     ->where('assigned_tasks.status', '=', AssignedTaskStatus::Completed);
@@ -110,14 +113,41 @@ class RatingController extends Controller
             ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
             ->select('users.id', 'users.name', 'users.avatar')
             ->selectRaw('COALESCE(SUM(bonus), 0) + COALESCE(SUM(number_of_points), 0) as total_points')
-            ->where('roles.name', 'student')
+            ->where('users.mentor_id', '=', $mentorId)
             ->groupBy('users.id', 'users.name', 'users.avatar')
             ->orderByDesc('total_points')
             ->get()
             ->toArray();
 
+        return response()->json([
+            'content' => view('client.rating.mentor_users', [
+                'users' => $users
+            ])->render()
+        ]);
+    }
+
+    public function display(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    {
+        $rating_users = User::query()
+            ->leftJoin('users_roles', 'users.id', '=', 'users_roles.user_id')
+            ->leftJoin('roles', 'users_roles.role_id', '=', 'roles.id')
+            ->leftJoin('mentors', 'users.mentor_id', '=', 'mentors.id')
+            ->leftJoin('assigned_tasks', function ($join) {
+                $join->on('users.id', '=', 'assigned_tasks.user_id')
+                    ->where('assigned_tasks.status', '=', AssignedTaskStatus::Completed);
+            })
+            ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
+            ->select('mentors.id', 'mentors.name', 'mentors.avatar')
+            ->selectRaw('COALESCE(SUM(bonus), 0) + COALESCE(SUM(number_of_points), 0) as total_points')
+            ->where('roles.name', '=', 'student')
+            ->whereNotNull('mentors.name')
+            ->groupBy('mentors.id', 'mentors.name', 'mentors.avatar')
+            ->orderByDesc('total_points')
+            ->get()
+            ->toArray();
+
         if ($rating_users) {
-            $total_points_max = $rating_users[0]['total_points'] ?? 0;
+            $total_points_max = $rating_users[0]['total_points'];
 
             foreach ($rating_users as $key => $rating_user) {
                 if ($total_points_max > 0) {

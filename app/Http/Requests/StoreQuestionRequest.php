@@ -22,7 +22,7 @@ class StoreQuestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question_content' => ['required', 'min:3', 'max:500'],
+            'question_content' => ['required', 'min:3', 'max:1500'],
         ];
     }
 
@@ -31,7 +31,7 @@ class StoreQuestionRequest extends FormRequest
         return [
             'question_content.required' => 'Заполните поле вопрос.',
             'question_content.min' => 'Вопрос должен быть не меньше 3 символов.',
-            'question_content.max' => 'Вопрос должен быть не больше 500 символов.',
+            'question_content.max' => 'Вопрос должен быть не больше 1500 символов.',
         ];
     }
 }

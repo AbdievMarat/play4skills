@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('content', 500);
+            $table->text('content');
             $table->foreignIdFor(Key::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('status', [array_column(QuestionStatus::cases(), 'value')])->default(QuestionStatus::Awaiting->value);

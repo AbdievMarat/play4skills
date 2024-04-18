@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-rating-detail" tabindex="-1">
+<div class="modal fade" id="points-detail-modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -42,18 +42,18 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col" colspan="2" class="text-center">Эффективность команды</th>
+                            <th scope="col" class="text-center">Команда</th>
                         </tr>
                         <tr>
                             <th scope="col" style="width: 60%">Имя</th>
-                            <th scope="col" style="width: 40%">Процент вовлеченности</th>
+{{--                            <th scope="col" style="width: 40%">Процент вовлеченности</th>--}}
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($participants as $participant => $efficiencyPercentage)
                             <tr>
                                 <td>{{ $participant }}</td>
-                                <td>{{ $efficiencyPercentage }} %</td>
+{{--                                <td>{{ $efficiencyPercentage }} %</td>--}}
                             </tr>
                         @endforeach
                         </tbody>

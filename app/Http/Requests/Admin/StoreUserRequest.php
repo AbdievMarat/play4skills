@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -27,6 +28,14 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'command' => ['nullable', 'array'],
+            'mentor_id' => [
+                'nullable',
+                Rule::requiredIf(function () {
+                    $studentRole = Role::query()->where('name', '=', 'student')->first();
+                    return $this->input('role_id') == $studentRole->id;
+                }),
+                Rule::exists('mentors', 'id')
+            ],
         ];
     }
 }

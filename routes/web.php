@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AssignedTaskController;
 use App\Http\Controllers\Admin\LessonController;
+use App\Http\Controllers\Admin\MentorController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\TaskController;
@@ -31,8 +32,9 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('register', [LoginController::class, 'showRegisterForm'])->name('showRegisterForm');
 Route::post('register', [LoginController::class, 'register'])->name('register');
 
-Route::get('rating_display', [RatingController::class, 'display'])->name('rating_display');
-Route::get('rating/{userId}', [RatingController::class, 'getDetailWithUser'])->name('getDetailWithUser');
+Route::get('rating_display', [RatingController::class, 'display'])->name('ratingDisplay');
+Route::get('rating_points_detail/{userId}', [RatingController::class, 'getPointsDetail'])->name('getPointsDetail');
+Route::get('rating_mentor_users/{mentorId}', [RatingController::class, 'getMentorUsers'])->name('getRatingUsers');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resources([
@@ -40,6 +42,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
         'messages' => MessageController::class,
         'lessons' => LessonController::class,
         'tasks' => TaskController::class,
+        'mentors' => MentorController::class,
     ]);
     Route::resource('questions', QuestionController::class)->only(['index', 'edit', 'update']);
     Route::resource('assigned_tasks', AssignedTaskController::class)->only(['index', 'create', 'store', 'destroy']);

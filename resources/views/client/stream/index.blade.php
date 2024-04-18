@@ -12,10 +12,10 @@
                     <form class="input-group @error('question_content') is-invalid @enderror" method="POST" action="{{ route('storeQuestion') }}">
                         @csrf
 
-                        <span class="input-group-text">{{ $amountKeys }}</span>
-                        <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                        <span class="input-group-text" style="font-size: 20px;">{{ $amountKeys }}</span>
+                        <span class="input-group-text" style="font-size: 22px;"><i class="bi bi-lightbulb"></i></span>
 
-                        <input type="text" name="question_content" class="form-control @error('question_content') is-invalid @enderror" value="{{ old('question_content') }}" placeholder="Введите вопрос" aria-label="Введите вопрос" aria-describedby="submit-question">
+                        <textarea name="question_content" rows="3" class="form-control @error('question_content') is-invalid @enderror" placeholder="Введите вопрос" aria-label="Введите вопрос" aria-describedby="submit-question">{{ old('question_content') }}</textarea>
 
                         <button type="submit" class="btn btn-primary" id="submit-question" @if($amountKeys === 0) disabled @endif>Отправить</button>
                     </form>
