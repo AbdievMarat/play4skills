@@ -1,6 +1,10 @@
 <ol class="list-group list-group-numbered mt-2">
     @foreach($users as $user)
-        <li class="list-group-item d-flex justify-content-between align-items-start cursor-pointer points-detail" data-user_id="{{ $user['id'] }}">
+        <li
+            class="list-group-item d-flex justify-content-between align-items-start points-detail"
+            style="cursor: pointer;"
+            data-user_id="{{ $user['id'] }}"
+        >
             <div class="ms-2 me-auto">
                 <div class="fw-bold">{{ $user['name'] }}</div>
             </div>
