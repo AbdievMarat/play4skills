@@ -4,10 +4,10 @@
     <div class="container-fluid row px-2 py-4">
         <div class="col-md-4">
             <div class="card mb-3">
-                <img src="{{ asset('box1.png') }}" class="mx-auto" style="max-width: 100%" alt="">
+                <img src="{{ asset('logo.png') }}" class="mx-auto" style="max-width: 100%" alt="">
                 <div class="card-body">
-                    <h5 class="card-title">Задай вопрос</h5>
-                    <p class="card-text">Для получения ключа необходимо выполнить задание</p>
+                    <h5 class="card-title">{{ $configQuestion }}</h5>
+                    <p class="card-text">{{ $configQuestionDescription }}</p>
 
                     <form class="input-group @error('question_content') is-invalid @enderror" method="POST" action="{{ route('storeQuestion') }}">
                         @csrf
@@ -15,9 +15,9 @@
                         <span class="input-group-text" style="font-size: 20px;">{{ $amountKeys }}</span>
                         <span class="input-group-text" style="font-size: 22px;"><i class="bi bi-lightbulb"></i></span>
 
-                        <textarea name="question_content" rows="3" class="form-control @error('question_content') is-invalid @enderror" placeholder="Введите вопрос" aria-label="Введите вопрос" aria-describedby="submit-question">{{ old('question_content') }}</textarea>
+                        <textarea name="question_content" rows="3" class="form-control @error('question_content') is-invalid @enderror" placeholder="Введите решение" aria-label="Введите решение" aria-describedby="submit-question">{{ old('question_content') }}</textarea>
 
-                        <button type="submit" class="btn btn-primary" id="submit-question" @if($amountKeys === 0) disabled @endif>Отправить</button>
+                        <button type="submit" class="btn @if($amountKeys === 0) btn-secondary @else btn-primary @endif" id="submit-question" @if($amountKeys === 0) disabled @endif>Отправить</button>
                     </form>
 
                     @error('question_content')
@@ -27,7 +27,7 @@
             </div>
             <div class="card mb-3">
                 <div class="card-header">
-                    Отправленные вопросы
+                    Отправленные решения
                 </div>
                 <ul class="list-group list-group-flush">
                     @forelse($questions as $question)
@@ -38,7 +38,7 @@
                             </div>
                         </li>
                     @empty
-                        <li class="list-group-item">Нет оправленных вопросов</li>
+                        <li class="list-group-item">Нет оправленных решений</li>
                     @endforelse
                 </ul>
             </div>
@@ -47,7 +47,7 @@
             <div style="position: relative; height: 600px; overflow: auto;">
                 @foreach($messages as $message)
                     <div class="d-flex flex-row justify-content-start">
-                        <div style="display: flex; flex-direction: column;">
+                        <div style="display: flex; flex-direction: column; width: 50px;">
                             <img src="{{ asset('avatar-default.webp') }}" alt="avatar" style="width: 45px;">
                             <span style="word-break: break-all;">{{ $message->user->name ?? '' }}</span>
                         </div>

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreQuestionRequest extends FormRequest
+class UpdateQuestionConfigsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,16 @@ class StoreQuestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'question_content' => ['required', 'min:3', 'max:1500'],
+            'config_ids' => ['array'],
+            'config_ids.*' => ['required', 'max:255']
         ];
     }
 
     public function messages(): array
     {
         return [
-            'question_content.required' => 'Заполните поле решение.',
-            'question_content.min' => 'Решение должно быть не меньше 3 символов.',
-            'question_content.max' => 'Решение должно быть не больше 1500 символов.',
+            'config_ids.*.required' => 'Поле обязательно к заполнению',
+            'config_ids.*.max' => 'Количество символов не может превышать 255',
         ];
     }
 }

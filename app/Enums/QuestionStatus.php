@@ -4,10 +4,9 @@ namespace App\Enums;
 
 enum QuestionStatus: string
 {
-    case Awaiting = 'Ожидает ответа';
-    case Incorrect = 'Некорректный вопрос';
-    case No = 'Нет';
-    case Yes = 'Да';
+    case Awaiting = 'На проверке';
+    case Incorrect = 'Возвращено на доработку';
+    case Yes = 'Ответ принят';
 
     public static function values(): array
     {

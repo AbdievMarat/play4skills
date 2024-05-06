@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AssignedTaskSeeder::class);
         $this->call(KeySeeder::class);
         $this->call(ChatSeeder::class);
+        $this->call(ConfigSeeder::class);
     }
 }

@@ -6,6 +6,7 @@ use App\Enums\MessageStatus;
 use App\Enums\QuestionStatus;
 use App\Http\Requests\Admin\StoreMessageRequest;
 use App\Http\Requests\StoreQuestionRequest;
+use App\Models\Config;
 use App\Models\Message;
 use App\Models\Question;
 use Illuminate\Contracts\View\Factory;
@@ -25,7 +26,14 @@ class StreamController extends Controller
             ->orderByRaw('pinned DESC, updated_at DESC')
             ->get();
 
-        return view('client.stream.index', compact('amountKeys', 'questions', 'messages'));
+        $configQuestion = Config::query()
+            ->where('id', Config::CONFIG_QUESTION_ID)
+            ->value('value');
+        $configQuestionDescription = Config::query()
+            ->where('id', Config::CONFIG_QUESTION_DESCRIPTION_ID)
+            ->value('value');
+
+        return view('client.stream.index', compact('amountKeys', 'questions', 'messages', 'configQuestion', 'configQuestionDescription'));
     }
 
     public function storeMessage(StoreMessageRequest $request): RedirectResponse
@@ -52,7 +60,7 @@ class StreamController extends Controller
             $question->user()->associate($request->user());
             $question->save();
         } else {
-            return redirect()->back()->with('success', ['text' => 'У Вас недостаточно ключей, чтобы задать вопрос!']);
+            return redirect()->back()->with('success', ['text' => 'У Вас недостаточно ключей, чтобы предложить решение!']);
         }
 
         return redirect()->back()->with('success', ['text' => 'Успешно отправлено!']);

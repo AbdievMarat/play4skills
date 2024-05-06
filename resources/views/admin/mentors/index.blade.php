@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">Задачи</div>
+        <div class="card-header">Наставники</div>
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div></div>
@@ -16,27 +16,30 @@
             <table id="tasks-table" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Название</th>
+                    <th>Имя</th>
+                    <th>Аватар</th>
                     <th style="width: 160px"></th>
                 </tr>
                 <tr>
                     <th>
-                        <x-input-search type="text" name="id" form="search" value="{{ Request::get('id') }}">
-                        </x-input-search>
-                    </th>
-                    <th>
                         <x-input-search type="text" name="name" form="search" value="{{ Request::get('name') }}">
                         </x-input-search>
                     </th>
+                    <th></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
                 @foreach($mentors as $mentor)
                     <tr>
-                        <td>{{ $mentor->id }}</td>
-                        <td>{{ $mentor->name }}</td><td>
+                        <td>{{ $mentor->name }}</td>
+                        <td>
+                            @if( $mentor->avatar )
+                                <img src="{{asset('storage/'.$mentor->avatar)}}" class="img-thumbnail mt-3" style="max-width: 150px;"
+                                     alt="avatar">
+                            @endif
+                        </td>
+                        <td>
                             <div class="d-flex justify-content-end">
                                 <div>
                                     <a href="{{ route('admin.mentors.show', ['mentor' => $mentor]) }}" type="button"
@@ -59,7 +62,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colspan="8">
+                    <th colspan="2">
                         {{ $mentors->links() }}
                     </th>
                 </tr>

@@ -14,7 +14,7 @@
                 <dd class="col-sm-8">{{ date('d.m.Y H:i', strtotime($mentor->created_at)) }}</dd>
                 <dt class="col-sm-4">Изменёно</dt>
                 <dd class="col-sm-8">{{ date('d.m.Y H:i', strtotime($mentor->updated_at)) }}</dd>
-                <dt class="col-sm-4">Название</dt>
+                <dt class="col-sm-4">Имя</dt>
                 <dd class="col-sm-8">{{ $mentor->name }}</dd>
             </dl>
             @if( $mentor->avatar )

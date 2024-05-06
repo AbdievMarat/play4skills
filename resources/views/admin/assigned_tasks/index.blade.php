@@ -5,7 +5,7 @@
         <div class="card-header">Порученные задания</div>
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
-                <div></div>
+                <a href="{{ route('admin.tasks.index') }}" class="btn btn-primary"><i class="bi bi-list-task"></i> Задачи</a>
                 <div>
                     <a href="{{ route('admin.assigned_tasks.create') }}" class="btn btn-success float-end">Поручить</a>
                 </div>

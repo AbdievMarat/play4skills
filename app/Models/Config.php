@@ -5,29 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
  * @property string $name
- * @property string $description
+ * @property string $value
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property-read User $users
- *
  * @mixin Builder
  */
-class Role extends Model
+class Config extends Model
 {
     use HasFactory;
 
-    /**
-     * @return BelongsToMany
-     */
-    public function users(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class,'users_roles');
-    }
+    public const CONFIG_QUESTION_ID = 1;
+    public const CONFIG_QUESTION_DESCRIPTION_ID = 2;
 }

@@ -45,6 +45,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
         'mentors' => MentorController::class,
     ]);
     Route::resource('questions', QuestionController::class)->only(['index', 'edit', 'update']);
+    Route::put('update_question_configs', [QuestionController::class, 'updateQuestionConfigs'])->name('updateQuestionConfigs');
     Route::resource('assigned_tasks', AssignedTaskController::class)->only(['index', 'create', 'store', 'destroy']);
     Route::put('assigned_tasks_accept/{assigned_task}', [AssignedTaskController::class, 'accept'])->name('assignedTasksAccept');
     Route::put('assigned_tasks_revision/{assigned_task}', [AssignedTaskController::class, 'revision'])->name('assignedTasksRevision');

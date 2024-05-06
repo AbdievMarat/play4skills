@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\QuestionStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UpdateQuestionConfigsRequest;
 use App\Http\Requests\Admin\UpdateQuestionRequest;
+use App\Models\Config;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
@@ -29,8 +31,14 @@ class QuestionController extends Controller
             $query->where('name', '=', 'student');
         })->pluck('name', 'id')->toArray();
         $statuses = QuestionStatus::values();
+        $configs = Config::query()
+            ->whereIn('id', [
+                Config::CONFIG_QUESTION_ID,
+                Config::CONFIG_QUESTION_DESCRIPTION_ID
+            ])
+            ->get();
 
-        return view('admin.questions.index', compact('questions','students', 'statuses'));
+        return view('admin.questions.index', compact('questions','students', 'statuses', 'configs'));
     }
 
     /**
@@ -57,5 +65,22 @@ class QuestionController extends Controller
         }
 
         return redirect()->route('admin.questions.index')->with('success', ['text' => 'Успешно обновлено!']);
+    }
+
+    /**
+     * @param UpdateQuestionConfigsRequest $request
+     * @return RedirectResponse
+     */
+    public function updateQuestionConfigs(UpdateQuestionConfigsRequest $request): RedirectResponse
+    {
+        $config_ids = $request->get('config_ids');
+
+        foreach ($config_ids as $id => $value) {
+            $config = Config::findOrFail($id);
+            $config->value = $value;
+            $config->save();
+        }
+
+        return redirect()->back()->with('success', ['text' => 'Настройки успешно сохранены!']);
     }
 }

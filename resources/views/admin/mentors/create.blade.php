@@ -10,8 +10,8 @@
                 @csrf
 
                 <div class="col-md-6">
-                    <x-forms.input type="text" name="name" id="name" label="Название"
-                                   placeholder="Заполните название" value="{{ old('name') }}">
+                    <x-forms.input type="text" name="name" id="name" label="Имя"
+                                   placeholder="Заполните имя" value="{{ old('name') }}">
                     </x-forms.input>
                 </div>
                 <div class="col-md-6">

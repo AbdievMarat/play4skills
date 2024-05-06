@@ -40,7 +40,7 @@
 {{--                    </a>--}}
 {{--                </li>--}}
                 <li class="nav-item"><a class="nav-link" href="{{ route('admin.messages.index') }}"><i class="bi bi-envelope"></i> Сообщения</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('admin.questions.index') }}"><i class="bi bi-question-circle"></i> Вопросы</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('admin.questions.index') }}"><i class="bi bi-question-circle"></i> Решения</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle dropdown-toggle-custom" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-gear"></i> Настройки
@@ -48,7 +48,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('admin.mentors.index') }}"><i class="bi bi-person"></i> Наставники</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.users.index') }}"><i class="bi bi-people"></i> Пользователи</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.lessons.index') }}"><i class="bi bi-book"></i> Гейм-мастера</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.lessons.index') }}"><i class="bi bi-book"></i> АйНоу</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.tasks.index') }}"><i class="bi bi-list-task"></i> Задачи</a></li>
                     </ul>
                 </li>

@@ -1,8 +1,34 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div class="card mb-2">
+        <div class="card-header">Текст который будет отражен на клиентской стороне</div>
+        <div class="card-body">
+            <form class="row g-3" method="POST" action="{{ route('admin.updateQuestionConfigs') }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                @foreach($configs as $config)
+                    <div class="col-md-6">
+                        <x-forms.input type="text" name="config_ids[{{ $config->id }}]" id="name" label="{{ $config->name }}"
+                                       placeholder="{{ $config->name }}" value="{{ $config->value }}">
+                        </x-forms.input>
+
+                        @error('config_ids.' . $config->id)
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                @endforeach
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="card">
-        <div class="card-header">Вопросы</div>
+        <div class="card-header">Решения</div>
         <div class="card-body">
             <form action="{{ route('admin.questions.index') }}" id="search" method="GET"></form>
 
@@ -10,7 +36,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Вопрос</th>
+                    <th>Решение</th>
                     <th>Отправитель</th>
                     <th>Статус</th>
                     <th style="width: 75px"></th>

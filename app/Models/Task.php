@@ -6,7 +6,26 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property string|null $file
+ * @property int $number_of_points
+ * @property int $number_of_keys
+ * @property boolean $important
+ * @property Carbon $date_deadline
+ * @property string $time_deadline
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property-read AssignedTask $assignedTasks
+ * @property-read Key $keys
+ *
+ * @mixin Builder
+ */
 class Task extends Model
 {
     use HasFactory;

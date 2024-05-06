@@ -6,7 +6,28 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int $id
+ * @property int $task_id
+ * @property int $user_id
+ * @property string|null $command
+ * @property string|null $comment
+ * @property string|null $attached_file
+ * @property int $bonus
+ * @property string|null $comment_moderator
+ * @property int|null $user_id_moderator
+ * @property string $status
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property-read Task $task
+ * @property-read User $user
+ * @property-read User $moderator
+ *
+ * @mixin Builder
+ */
 class AssignedTask extends Model
 {
     use HasFactory;

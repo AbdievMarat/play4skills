@@ -11,8 +11,32 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string|null $command
+ * @property string|null $avatar
+ * @property boolean $access_sent
+ * @property Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $decrypted_password
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property-read Role $roles
+ * @property-read Message $messages
+ * @property-read Question $questions
+ * @property-read AssignedTask $assignedTasks
+ * @property-read Key $keys
+ * @property-read Chat $chats
+ * @property-read Mentor $mentor
+ *
+ * @mixin Builder
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
