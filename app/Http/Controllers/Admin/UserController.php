@@ -90,9 +90,11 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $data = $request->validated();
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $data['password'] = Hash::make($request->get('password'));
             $data['decrypted_password'] = $request->get('password');
+        } else {
+            unset($data['password']);
         }
         $data['command'] = array_filter($data['command'], fn($value) => !is_null($value));
 

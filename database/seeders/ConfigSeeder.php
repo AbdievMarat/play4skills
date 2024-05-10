@@ -22,7 +22,7 @@ class ConfigSeeder extends Seeder
             [
                 "id" => Config::CONFIG_QUESTION_DESCRIPTION_ID,
                 "name" => "Текст описания",
-                "value" => "Для получения ключа необходимо выполнить задание"
+                "value" => "Для получения эврики необходимо выполнить задание"
             ],
         ];
 

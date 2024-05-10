@@ -11,7 +11,7 @@
 {{--                Совсем скоро вы узнаете имена победителей, а пока мы реши скрыть рейтинг для поддержания интриги.--}}
 {{--            </div>--}}
 {{--        </div>--}}
-        <form action="{{ route('ratingDisplay') }}" id="search" method="GET"></form>
+        <form action="{{ route('rating') }}" id="search" method="GET"></form>
 
         <div class="d-flex mt-3">
             <span class="input-group-text">Рейтинг</span>
