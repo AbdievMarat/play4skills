@@ -33,8 +33,8 @@ Route::get('register', [LoginController::class, 'showRegisterForm'])->name('show
 Route::post('register', [LoginController::class, 'register'])->name('register');
 
 Route::get('rating_display', [RatingController::class, 'display'])->name('ratingDisplay');
-Route::get('rating_points_detail/{userId}', [RatingController::class, 'getPointsDetail'])->name('getPointsDetail');
-Route::get('rating_mentor_users/{mentorId}', [RatingController::class, 'getMentorUsers'])->name('getRatingUsers');
+Route::get('rating_mentor_users/{mentorId}/{archivedAssignedTaskId}', [RatingController::class, 'getMentorUsers'])->name('getRatingUsers');
+Route::get('rating_points_detail/{userId}/{archivedAssignedTaskId}', [RatingController::class, 'getPointsDetail'])->name('getPointsDetail');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resources([
@@ -50,6 +50,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::put('assigned_tasks_accept/{assigned_task}', [AssignedTaskController::class, 'accept'])->name('assignedTasksAccept');
     Route::put('assigned_tasks_revision/{assigned_task}', [AssignedTaskController::class, 'revision'])->name('assignedTasksRevision');
     Route::put('assigned_tasks_under_review/{assigned_task}', [AssignedTaskController::class, 'underReview'])->name('assignedTasksUnderReview');
+    Route::post('assigned_tasks_archive', [AssignedTaskController::class, 'archive'])->name('assignedTasksArchive');
 });
 
 Route::middleware('auth')->group(function () {

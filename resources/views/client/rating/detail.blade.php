@@ -8,25 +8,29 @@
             <div class="modal-body">
                 @php
                     $totalPoints = 0;
+                    $totalKeys = 0;
                 @endphp
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col" colspan="2" class="text-center">Список заданий</th>
+                        <th scope="col" colspan="3" class="text-center">Список заданий</th>
                     </tr>
                     <tr>
-                        <th scope="col" style="width: 60%">Задание</th>
-                        <th scope="col" style="width: 40%">Баллы</th>
+                        <th scope="col" style="width: 50%">Задание</th>
+                        <th scope="col" style="width: 25%">Баллы</th>
+                        <th scope="col" style="width: 25%">Эврики</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($assignedTasks as $assignedTask)
                         @php
                             $totalPoints += $assignedTask['points'] ?? 0;
+                            $totalKeys += $assignedTask['keys'] ?? 0;
                         @endphp
                         <tr>
                             <td>{{ $assignedTask['name'] }}</td>
                             <td>{{ $assignedTask['points'] ?? 0 }}</td>
+                            <td>{{ $assignedTask['keys'] ?? 0 }}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -34,6 +38,7 @@
                     <tr>
                         <th>Итого:</th>
                         <th>{{ $totalPoints }}</th>
+                        <th>{{ $totalKeys }}</th>
                     </tr>
                     </tfoot>
                 </table>

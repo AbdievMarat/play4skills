@@ -8,6 +8,7 @@
             <div class="ms-2 me-auto">
                 <div class="fw-bold">{{ $user['name'] }}</div>
             </div>
+            <span class="badge bg-info rounded-pill me-2"><i class="bi bi-lightbulb"></i> {{ $user['total_keys'] ?? 0 }}</span>
             <span class="badge bg-primary rounded-pill">{{ $user['total_points'] }}</span>
         </li>
     @endforeach

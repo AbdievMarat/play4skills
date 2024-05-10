@@ -19,12 +19,14 @@ use Illuminate\Support\Carbon;
  * @property string|null $comment_moderator
  * @property int|null $user_id_moderator
  * @property string $status
+ * @property string $archived_assigned_task_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  * @property-read Task $task
  * @property-read User $user
  * @property-read User $moderator
+ * @property-read ArchivedAssignedTask $archive
  *
  * @mixin Builder
  */
@@ -57,6 +59,11 @@ class AssignedTask extends Model
         return $this->belongsTo(User::class, 'user_id_moderator');
     }
 
+    public function archive(): BelongsTo
+    {
+        return $this->belongsTo(ArchivedAssignedTask::class, 'archived_assigned_task_id');
+    }
+
     public function scopeFilter(Builder $query): void
     {
         $query->when(request('task_id'), function (Builder $q) {
@@ -77,6 +84,10 @@ class AssignedTask extends Model
 
         $query->when(request('status'), function (Builder $q) {
             $q->where("{$this->getTable()}.status", '=', request('status'));
+        });
+
+        $query->when(request('archived_assigned_task_id'), function (Builder $q) {
+            $q->where("{$this->getTable()}.archived_assigned_task_id", '=', request('archived_assigned_task_id'));
         });
     }
 }

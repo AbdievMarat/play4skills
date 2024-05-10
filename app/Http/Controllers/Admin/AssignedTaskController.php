@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\AssignedTaskStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreAssignedTaskRequest;
+use App\Models\ArchivedAssignedTask;
 use App\Models\AssignedTask;
 use App\Models\Key;
 use App\Models\Message;
@@ -24,7 +25,7 @@ class AssignedTaskController extends Controller
      */
     public function index(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        $assignedTasks = AssignedTask::with('task', 'user')
+        $assignedTasks = AssignedTask::with('task', 'user', 'archive')
             ->filter()
             ->orderBy('updated_at', 'desc')
             ->paginate(10)
@@ -35,8 +36,9 @@ class AssignedTaskController extends Controller
             $query->where('name', '=', 'student');
         })->pluck('name', 'id')->toArray();
         $statuses = AssignedTaskStatus::values();
+        $archived = ArchivedAssignedTask::query()->pluck('name', 'id')->all();
 
-        return view('admin.assigned_tasks.index', compact('assignedTasks', 'tasks', 'students', 'statuses'));
+        return view('admin.assigned_tasks.index', compact('assignedTasks', 'tasks', 'students', 'statuses', 'archived'));
     }
 
     /**
@@ -132,5 +134,28 @@ class AssignedTaskController extends Controller
         $assignedTask->update();
 
         return redirect()->back()->with('success', ['text' => 'Успешно сохранено!']);
+    }
+
+    public function archive(Request $request): RedirectResponse
+    {
+        $assignedTasks = AssignedTask::query()
+            ->whereNull('archived_assigned_task_id')
+            ->get();
+
+        if ($assignedTasks->isNotEmpty()) {
+            $archivedAssignedTask = new ArchivedAssignedTask();
+            $archivedAssignedTask->name = $request->get('name');
+            $archivedAssignedTask->save();
+
+            $ids = $assignedTasks->pluck('id');
+
+            AssignedTask::query()
+                ->whereIn('id', $ids)
+                ->update(['archived_assigned_task_id' => $archivedAssignedTask->id]);
+
+            return redirect()->back()->with('success', ['text' => 'Успешно заархивировано!']);
+        } else {
+            return redirect()->back()->with('error', ['text' => 'Нет порученных заданний!']);
+        }
     }
 }

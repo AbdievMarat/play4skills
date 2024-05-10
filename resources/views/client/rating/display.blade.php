@@ -27,6 +27,21 @@
         {{--                Совсем скоро вы узнаете имена победителей, а пока мы реши скрыть рейтинг для поддержания интриги.--}}
         {{--            </div>--}}
         {{--        </div>--}}
+
+        <form action="{{ route('ratingDisplay') }}" id="search" method="GET"></form>
+
+        <div class="d-flex mt-3">
+            <span class="input-group-text">Рейтинг</span>
+            <x-select-search name="archived_assigned_task_id" form="search">
+                <option value="0" selected>Текущий</option>
+                @foreach($archived as $key => $archive)
+                    <option value="{{ $key }}" @selected(request('archived_assigned_task_id') == $key) >
+                        {{ $archive }}
+                    </option>
+                @endforeach
+            </x-select-search>
+        </div>
+
         @foreach($rating_users as $rating_user)
             <nav class="navbar mt-4 btn btn-outline-success rounded-0 get-mentor-users" data-mentor_id="{{ $rating_user['id'] }}">
                 <a class="navbar-brand" href="#">
@@ -36,7 +51,10 @@
                             width="60">
                     {{ $rating_user['name'] }}
                 </a>
-                <button class="btn btn-danger me-2" type="button">{{ $rating_user['total_points'] ?? 0 }}</button>
+                <div class="ms-auto">
+                    <button class="btn btn-warning me-2" type="button"><i class="bi bi-lightbulb"></i> {{ $rating_user['total_keys'] ?? 0 }}</button>
+                    <button class="btn btn-danger me-2" type="button">{{ $rating_user['total_points'] ?? 0 }}</button>
+                </div>
             </nav>
             <div class="progress rounded-0">
                 <div class="progress-bar" role="progressbar" style="width: {{ $rating_user['percentage'] }}%"

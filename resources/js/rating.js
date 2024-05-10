@@ -3,13 +3,14 @@ $(() => {
         e.preventDefault();
 
         const mentor_id = $(this).data('mentor_id');
+        const archived_assigned_task_id = $('[name="archived_assigned_task_id"]').val();
         const csrf_token = $('meta[name="csrf-token"]').attr('content');
 
         $('#rating-detail-container').html('');
 
         $.ajax({
             type: 'GET',
-            url: '/rating_mentor_users/' + mentor_id,
+            url: `/rating_mentor_users/${mentor_id}/${archived_assigned_task_id}`,
             headers: {'X-CSRF-TOKEN': csrf_token},
         }).done(successResponse => {
             $(`#mentor-users-container-${mentor_id}`).html(successResponse.content);
@@ -22,13 +23,14 @@ $(() => {
         e.preventDefault();
 
         const user_id = $(this).data('user_id');
+        const archived_assigned_task_id = $('[name="archived_assigned_task_id"]').val();
         const csrf_token = $('meta[name="csrf-token"]').attr('content');
 
         $('#rating-detail-container').html('');
 
         $.ajax({
             type: 'GET',
-            url: '/rating_points_detail/' + user_id,
+            url: `/rating_points_detail/${user_id}/${archived_assigned_task_id}`,
             headers: {'X-CSRF-TOKEN': csrf_token},
         }).done(successResponse => {
             $('#points-detail-container').html(successResponse.modal_content);

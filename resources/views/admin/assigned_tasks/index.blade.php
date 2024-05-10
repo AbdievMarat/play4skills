@@ -7,7 +7,20 @@
             <div class="d-flex justify-content-between mb-3">
                 <a href="{{ route('admin.tasks.index') }}" class="btn btn-primary"><i class="bi bi-list-task"></i> Задачи</a>
                 <div>
-                    <a href="{{ route('admin.assigned_tasks.create') }}" class="btn btn-success float-end">Поручить</a>
+                    <form
+                        action="{{ route('admin.assignedTasksArchive') }}"
+                        method="post"
+                        class="d-inline mx-3"
+                    >
+                        @csrf
+                        <button
+                            type="submit"
+                            class="btn btn-warning archive"
+                        >
+                            <i class="bi bi-archive"></i> Архивировать
+                        </button>
+                    </form>
+                    <a href="{{ route('admin.assigned_tasks.create') }}" class="btn btn-success float-end"><i class="bi bi-person-plus-fill"></i> Поручить</a>
                 </div>
             </div>
 
@@ -20,6 +33,7 @@
                     <th>Исполнитель</th>
                     <th>Комментарий</th>
                     <th>Бонус</th>
+                    <th style="width: 135px">Архив</th>
                     <th>Статус</th>
                     <th style="width: 160px"></th>
                 </tr>
@@ -42,6 +56,11 @@
                         <x-input-search type="number" name="bonus" form="search"
                                         value="{{ Request::get('bonus') }}">
                         </x-input-search>
+                    </th>
+                    <th>
+                        <x-select-search name="archived_assigned_task_id" form="search" :options="$archived"
+                                         value="{{ Request::get('archived_assigned_task_id') }}">
+                        </x-select-search>
                     </th>
                     <th>
                         <x-select-search name="status" form="search" :options="$statuses"
@@ -79,6 +98,7 @@
                             Изменено: {{ date('d.m.Y H:i', strtotime($assignedTask->updated_at)) }}
                         </td>
                         <td>{{ $assignedTask->bonus }}</td>
+                        <td>{{ $assignedTask->archive->name ?? '' }}</td>
                         <td>
                             <button class="btn btn-primary disabled">{{ $assignedTask->status }}</button>
                         </td>
@@ -139,4 +159,8 @@
             </table>
         </div>
     </div>
+
+    @push('scripts')
+        @vite(['resources/js/admin/assignedTasks.js'])
+    @endpush
 @endsection

@@ -4,10 +4,15 @@
         name="{{ $name }}"
         class="form-select"
     >
-        <option value="">Выберите</option>
-        @foreach($options as $key => $option)
+        @if($options)
+            <option value=""></option>
+        @endif
+
+        @forelse($options as $key => $option)
             <option value="{{ $key }}" @selected($key == $value)>{{ $option }}</option>
-        @endforeach
+        @empty
+            {{ $slot }}
+        @endforelse
     </select>
     <button data-name="{{ $name }}" class="btn btn-outline-danger clean-input">
         <i class="bi bi-x-lg"></i>

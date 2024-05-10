@@ -62,4 +62,33 @@ $(() => {
             }
         });
     });
+
+    $(document).on('click', '.archive', function (e) {
+        e.preventDefault();
+        const form = $(this).closest('form');
+
+        Swal.fire({
+            title: 'Вы уверены, что хотите архивировать все порученные задания?',
+            text: "Это действие необратимо и приведет к архивировации всех заданий из текущего списка!",
+            icon: 'warning',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Да, архивировать!',
+            cancelButtonText: 'Отмена!',
+            showLoaderOnConfirm: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Пожалуйста, введите название архива!';
+                }
+            },
+            preConfirm: (name) => {
+                form.append(`<input type="hidden" name="name" value="${name}">`);
+                form.submit();
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        });
+    });
 });
