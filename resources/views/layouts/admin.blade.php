@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/admin/assignedTasks.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @stack('scripts')
 </head>
 <body>
