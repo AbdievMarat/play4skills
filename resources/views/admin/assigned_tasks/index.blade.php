@@ -159,8 +159,4 @@
             </table>
         </div>
     </div>
-
-    @push('scripts')
-        @vite(['resources/js/admin/assignedTasks.js'])
-    @endpush
 @endsection
