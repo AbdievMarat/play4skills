@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\StreamController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,11 +27,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login']);
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('register', [LoginController::class, 'showRegisterForm'])->name('showRegisterForm');
-Route::post('register', [LoginController::class, 'register'])->name('register');
+Auth::routes();
+Route::get('auth_register', [LoginController::class, 'showRegisterForm'])->name('showAuthRegisterForm');
+Route::post('auth_register', [LoginController::class, 'register'])->name('authRegister');
 
 Route::get('rating_display', [RatingController::class, 'display'])->name('ratingDisplay');
 Route::get('rating_mentor_users/{mentorId}/{archivedAssignedTaskId}', [RatingController::class, 'getMentorUsers'])->name('getRatingUsers');
