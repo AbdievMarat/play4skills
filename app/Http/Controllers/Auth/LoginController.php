@@ -55,7 +55,7 @@ class LoginController extends Controller
     {
         $email = $request->validated()['email'];
 
-        $user = User::query()->where('email', $email)->first();
+        $user = User::firstWhere('email', $email);
 
         $name = $user->name;
         $password = $user->decrypted_password;
@@ -63,9 +63,7 @@ class LoginController extends Controller
         $mailer = Mail::to($email)->send(new WelcomeEmail($email, $name, $password));
 
         if ($mailer) {
-            User::query()
-                ->where('email', '=', $email)
-                ->update(['access_sent' => true]);
+            $user->update(['access_sent' => true]);
 
             $text = 'Доступ отправлен на Вашу почту!';
         } else {
