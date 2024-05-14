@@ -53,7 +53,8 @@ class User extends Authenticatable
         'decrypted_password',
         'command',
         'mentor_id',
-        'avatar'
+        'avatar',
+        'access_sent'
     ];
 
     /**

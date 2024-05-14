@@ -24,7 +24,12 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email', Rule::exists('users', 'email'), new UserAccessSentRule],
+            'email' => [
+                'required',
+                'email',
+                Rule::exists('users', 'email'),
+                new UserAccessSentRule
+            ],
         ];
     }
 
