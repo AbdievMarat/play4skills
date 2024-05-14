@@ -15,7 +15,10 @@ class UserAccessSentRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $access_sent = User::query()->where('email', $value)->where('access_sent', '=', true)->exists();
+        $access_sent = User::query()
+            ->where('email', '=', $value)
+            ->where('access_sent', '=', true)
+            ->exists();
 
         if($access_sent){
             $fail('Данному пользователю ранее был отправлен доступ.');
