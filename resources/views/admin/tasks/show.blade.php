@@ -20,7 +20,7 @@
                 <dd class="col-sm-8">{!! $task->description !!}</dd>
                 <dt class="col-sm-4">Баллы</dt>
                 <dd class="col-sm-8">{{ $task->number_of_points }}</dd>
-                <dt class="col-sm-4">Ключи</dt>
+                <dt class="col-sm-4">Эврики</dt>
                 <dd class="col-sm-8">{{ $task->number_of_keys }}</dd>
                 <dt class="col-sm-4">Крайний срок</dt>
                 <dd class="col-sm-8">{{ date('d.m.Y', strtotime($task->date_deadline)) }}</dd>

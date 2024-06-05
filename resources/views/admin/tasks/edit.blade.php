@@ -49,8 +49,8 @@
                     </x-forms.input>
                 </div>
                 <div class="col-md-3">
-                    <x-forms.input type="number" name="number_of_keys" id="number_of_keys" label="Ключи"
-                                   placeholder="Заполните количество ключей"
+                    <x-forms.input type="number" name="number_of_keys" id="number_of_keys" label="Эврики"
+                                   placeholder="Заполните количество эврик"
                                    value="{{ old('number_of_keys') ?? $task->number_of_keys }}">
                     </x-forms.input>
                 </div>
