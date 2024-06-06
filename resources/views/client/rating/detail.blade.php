@@ -25,12 +25,12 @@
                     @foreach($assignedTasks as $assignedTask)
                         @php
                             $totalPoints += $assignedTask['points'] ?? 0;
-                            $totalKeys += $assignedTask['keys'] ?? 0;
+                            $totalKeys += $assignedTask['key_count'] ?? 0;
                         @endphp
                         <tr>
                             <td>{{ $assignedTask['name'] }}</td>
                             <td>{{ $assignedTask['points'] ?? 0 }}</td>
-                            <td>{{ $assignedTask['keys'] ?? 0 }}</td>
+                            <td>{{ $assignedTask['key_count'] ?? 0 }}</td>
                         </tr>
                     @endforeach
                     </tbody>

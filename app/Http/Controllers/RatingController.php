@@ -99,7 +99,7 @@ class RatingController extends Controller
             })
             ->select('assigned_tasks.id')
             ->selectRaw('COALESCE(SUM(bonus), 0) + COALESCE(SUM(number_of_points), 0) as points')
-            ->selectRaw('COALESCE(SUM(keys.amount), 0) as keys')
+            ->selectRaw('COALESCE(SUM(keys.amount), 0) as key_count')
             ->where('assigned_tasks.user_id', '=', $userId)
             ->where('status', '=', AssignedTaskStatus::Completed)
             ->when($archivedAssignedTaskId > 0, function ($query) use ($archivedAssignedTaskId) {
@@ -114,7 +114,7 @@ class RatingController extends Controller
                 $join->on('assigned_tasks.id', '=', 'completed_tasks.id');
             })
             ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
-            ->select('tasks.name', 'completed_tasks.points', 'completed_tasks.keys')
+            ->select('tasks.name', 'completed_tasks.points', 'completed_tasks.key_count')
             ->where('user_id', '=', $userId)
             ->when($archivedAssignedTaskId > 0, function ($query) use ($archivedAssignedTaskId) {
                 $query->where('assigned_tasks.archived_assigned_task_id', '=', $archivedAssignedTaskId);
