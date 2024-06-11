@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('command')->nullable();
+            $table->text('command')->nullable();
             $table->string('avatar')->nullable();
             $table->boolean('access_sent')->default(false);
             $table->timestamp('email_verified_at')->nullable();
