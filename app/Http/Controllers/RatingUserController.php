@@ -72,7 +72,7 @@ class RatingUserController extends Controller
             ->where('roles.name', '=', 'student')
             ->groupBy('users.id', 'users.name', 'users.avatar')
             ->orderByDesc('total_points')
-            ->orderBy('users.avatar')
+            ->orderByDesc('users.avatar')
             ->orderBy('users.name')
             ->get()
             ->toArray();
