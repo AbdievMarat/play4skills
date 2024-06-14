@@ -47,7 +47,7 @@
             <div style="position: relative; height: 600px; overflow: auto;">
                 @foreach($messages as $message)
                     <div class="d-flex flex-row justify-content-start">
-                        <div style="display: flex; flex-direction: column; width: 50px;">
+                        <div style="display: flex; flex-direction: column; width: 50px; font-size: 13px;">
                             <img src="{{ asset('avatar-default.webp') }}" alt="avatar" style="width: 45px;">
                             <span style="word-break: break-all;">{{ $message->user->name ?? '' }}</span>
                         </div>
