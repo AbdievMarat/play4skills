@@ -48,7 +48,7 @@
                     <img
                             src="{{ $rating_user['avatar'] ? asset('storage/'.$rating_user['avatar']) : asset('avatar-default.webp') }}"
                             alt="avatar" class="d-inline-block mx-3"
-                            width="60">
+                            width="100">
                     {{ $rating_user['name'] }}
                 </a>
                 <div class="ms-auto">
