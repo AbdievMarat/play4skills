@@ -206,6 +206,8 @@ class RatingController extends Controller
             ->whereNotNull('mentors.name')
             ->groupBy('mentors.id', 'mentors.name', 'mentors.avatar')
             ->orderByDesc('total_points')
+            ->orderBy('mentors.avatar')
+            ->orderBy('mentors.name')
             ->get()
             ->toArray();
 

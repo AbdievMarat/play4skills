@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\RatingUserController;
 use App\Http\Controllers\StreamController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::get('auth_register', [LoginController::class, 'showRegisterForm'])->name(
 Route::post('auth_register', [LoginController::class, 'register'])->name('authRegister');
 
 Route::get('rating_display', [RatingController::class, 'display'])->name('ratingDisplay');
+Route::get('rating_users_display', [RatingUserController::class, 'display'])->name('ratingUsersDisplay');
 Route::get('rating_mentor_users/{mentorId}/{archivedAssignedTaskId}', [RatingController::class, 'getMentorUsers'])->name('getRatingUsers');
 Route::get('rating_points_detail/{userId}/{archivedAssignedTaskId}', [RatingController::class, 'getPointsDetail'])->name('getPointsDetail');
 
@@ -63,5 +65,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('assigned_tasks', App\Http\Controllers\AssignedTaskController::class)->only(['index', 'edit', 'update']);
     Route::resource('users', App\Http\Controllers\UserController::class)->only(['edit', 'update']);
     Route::get('rating', [RatingController::class, 'index'])->name('rating');
+    Route::get('rating_users', [RatingUserController::class, 'index'])->name('rating_users');
 });
 

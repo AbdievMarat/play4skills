@@ -41,7 +41,8 @@
 {{--                </li>--}}
                 <li class="nav-item"><a class="nav-link" href="{{ route('admin.messages.index') }}"><i class="bi bi-envelope"></i> Сообщения</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('admin.questions.index') }}"><i class="bi bi-question-circle"></i> Решения</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('ratingDisplay') }}" target="_blank"><i class="bi bi-graph-up"></i> Рейтинг</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('ratingDisplay') }}" target="_blank"><i class="bi bi-graph-up"></i> Рейтинг наставников</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('ratingUsersDisplay') }}" target="_blank"><i class="bi bi-graph-up"></i> Рейтинг капитанов</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle dropdown-toggle-custom" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-gear"></i> Настройки
