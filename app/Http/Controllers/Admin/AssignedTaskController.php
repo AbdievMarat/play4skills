@@ -48,7 +48,7 @@ class AssignedTaskController extends Controller
     {
         $tasks = Task::query()->pluck('name', 'id')->all();
         $students = User::query()->whereHas('roles', function (Builder $query) {
-            $query->where('name', '=', 'student');
+            $query->whereIn('name', ['student', 'moderator']);
         })->pluck('name', 'id')->toArray();
 
         return view('admin.assigned_tasks.create', compact('tasks', 'students'));

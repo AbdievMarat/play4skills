@@ -106,7 +106,9 @@
                                        placeholder="Выберите изображение">
                         </x-forms.input>
 
-                        <button type="submit" class="btn btn-success mt-2">Сохранить</button>
+                        @if(Auth::user()->hasRole('student'))
+                            <button type="submit" class="btn btn-success mt-2">Сохранить</button>
+                        @endif
                     </form>
                 </div>
             </div>
