@@ -1,4 +1,4 @@
-@if (session('success'))
+@if (session('success') && is_array(session('success')) && isset(session('success')['text']))
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         const message = "{{ session('success')['text'] }}";
@@ -12,7 +12,7 @@
     </script>
 @endif
 
-@if (session('error'))
+@if (session('error') && is_array(session('error')) && isset(session('error')['text']))
     <script type="text/javascript">
         const message = "{{ session('error')['text'] }}";
         document.addEventListener("DOMContentLoaded", () => {
