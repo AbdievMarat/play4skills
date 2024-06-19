@@ -82,9 +82,14 @@ class AssignedTaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AssignedTask $assignedTask): RedirectResponse
+    public function destroy(Request $request, AssignedTask $assignedTask): RedirectResponse
     {
         $assignedTask->delete();
+
+        $message = new Message();
+        $message->content = "Пользователь {$request->user()->name} отозвал задачу '{$assignedTask->task->name}' пользователя {$assignedTask->user->name}.";
+        $message->user()->associate($request->user());
+        $message->save();
 
         return redirect()->back()->with('success', ['text' => 'Успешно удалено!']);
     }
