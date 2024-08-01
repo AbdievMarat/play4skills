@@ -27,7 +27,7 @@ class StoreLessonRequest extends FormRequest
         return [
             'name' => ['required', 'min:3', 'max:255'],
             'link' => ['required', 'url', 'regex:/https:\/\/www\.youtube\.com\/embed/'],
-            'content' => ['required'],
+            'content' => ['required', 'max:65535'],
             'status' => [new Enum(LessonStatus::class)],
         ];
     }

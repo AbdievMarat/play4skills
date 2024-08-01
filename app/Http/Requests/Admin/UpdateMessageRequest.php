@@ -24,7 +24,7 @@ class UpdateMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => ['required', 'min:3'],
+            'content' => ['required', 'min:3', 'max:65535'],
             'pinned' => ['boolean'],
             'status' => [new Enum(MessageStatus::class)],
         ];

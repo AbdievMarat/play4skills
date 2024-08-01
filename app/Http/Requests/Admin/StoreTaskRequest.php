@@ -24,7 +24,7 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'description' => ['required'],
+            'description' => ['required', 'max:65535'],
             'file' => ['nullable', File::image()->max(2 * 1024)],
             'number_of_points' => ['required', 'integer'],
             'number_of_keys' => ['required', 'integer'],
