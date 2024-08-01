@@ -30,4 +30,11 @@ class UpdateAssignedTaskRequest extends FormRequest
             'command_member_name' => ['nullable', 'array'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'comment.max' => 'Комментарий не должен содержать изображений.',
+        ];
+    }
 }

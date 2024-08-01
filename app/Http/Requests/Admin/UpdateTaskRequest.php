@@ -40,4 +40,11 @@ class UpdateTaskRequest extends FormRequest
             'important' => filter_var($this->input('important'), FILTER_VALIDATE_BOOLEAN),
         ]);
     }
+
+    public function messages(): array
+    {
+        return [
+            'description.max' => 'Описание не должно содержать изображений.',
+        ];
+    }
 }
