@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('client_lessons', [App\Http\Controllers\LessonController::class, 'index'])->name('clientLessons');
     Route::resource('assigned_tasks', App\Http\Controllers\AssignedTaskController::class)->only(['index', 'edit', 'update']);
     Route::resource('users', App\Http\Controllers\UserController::class)->only(['edit', 'update']);
-    Route::get('rating', [RatingController::class, 'index'])->name('rating');
-    Route::get('rating_users', [RatingUserController::class, 'index'])->name('rating_users');
+//    Route::get('rating', [RatingController::class, 'index'])->name('rating');
+//    Route::get('rating_users', [RatingUserController::class, 'index'])->name('rating_users');
 });
 

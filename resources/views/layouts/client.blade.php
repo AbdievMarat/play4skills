@@ -33,8 +33,8 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('stream') }}"><i class="bi bi-megaphone"></i> Новости</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('clientLessons') }}"><i class="bi bi-book"></i> АйНоу</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('assigned_tasks.index') }}"><i class="bi bi-list-task"></i> Задания</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('rating') }}"><i class="bi bi-graph-up"></i> Рейтинг наставников</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('rating_users') }}"><i class="bi bi-trophy"></i> Рейтинг капитанов</a></li>
+{{--                <li class="nav-item"><a class="nav-link" href="{{ route('rating') }}"><i class="bi bi-graph-up"></i> Рейтинг наставников</a></li>--}}
+{{--                <li class="nav-item"><a class="nav-link" href="{{ route('rating_users') }}"><i class="bi bi-trophy"></i> Рейтинг капитанов</a></li>--}}
                 <li class="nav-item"><a class="nav-link" href="{{ route('users.edit', ['user' => Auth::user()]) }}"><i class="bi bi-person-circle"></i> Личный кабинет</a></li>
 {{--                <li class="nav-item">--}}
 {{--                    <a class="nav-link" href="{{ route('chats.index') }}">--}}
